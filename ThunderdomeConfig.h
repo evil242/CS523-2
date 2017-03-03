@@ -48,7 +48,7 @@ static char population_name[32]="";
 static int population_size=5;
 
 static int starting_cycle=0;
-static int number_of_cycles=250;
+static int number_of_cycles=10;
 
 static int number_of_battles=3;
 

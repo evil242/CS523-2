@@ -5,3 +5,8 @@ Adding example of 2000 ga_war.c
 by jason boer 3/20/97
 jason@ezmo.com
 http://corewar.co.uk/boer/ga_war.c
+
+
+
+ga_war creates a single warrior and cycles through validattion until
+ it runs against plant.red

@@ -78,6 +78,8 @@ class Warrior {  // individual
      //cross over
      Warrior& operator+(const Warrior&);
 
+     Mutation();
+
      void fprint(FILE * file);
      void fprint();
      void print();

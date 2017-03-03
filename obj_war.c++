@@ -91,22 +91,31 @@ Modified for Warrior class
 }/*test_viable()*/ 
 
 
-
+// Initial construction of a new Warrior
+//  Takes String n "simple name eg dt, or dd"
+// and serial number sn eg 0-9 for pop of 10
 Warrior::Warrior(string n, int sn)
 : rank(0), serno(sn) {
-  tail = "end;";
+
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
+  tail = "end;";
 
   fname = n + "_" + to_string(serno) + ".red";
 
   do {
     loc=0;
     body.clear();
+
+    // now nets build a body of code 10 lines long
     for(int i=0; i<10; i++) {
+
+      // fetch string of "opcode.opmod addrmode #,addrmode #"
       body.push_back(new_line_of_code());
-      loc++;
+      loc++;  // incr lines of code
     }
-  } while (test_viable() ==0);
+
+   // did warrior come alive?
+  } while (test_viable() ==0);  // keep creating body until it works
    	
 }
 
@@ -136,11 +145,17 @@ void Warrior::print() {
 // This replaces file_copy
 // and straight_replace
 Warrior &Warrior::operator=(const Warrior &rhs) {
-  header = rhs.header;
   rank = 0;
+
   loc = rhs.loc;
-  //for (int i = 0; i<loc; i++ {
-     body = rhs.body;
+
+  body = rhs.body;
+}
+
+
+Warrior &Warrior::operator+(const Warrior &rhs) {
+
+
 }
 
 

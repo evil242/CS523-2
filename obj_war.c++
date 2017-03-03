@@ -102,7 +102,7 @@ Warrior::Warrior(string n, int sn)
   do {
     for(int i=0; i<10; i++) {
       body[i] = new_line_of_code();
-      loc = i;
+      loc = i+1;
     }
     fprint();
   } while (test_viable() ==0);

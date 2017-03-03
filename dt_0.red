@@ -11,4 +11,5 @@ mov.ab $ 7,# 4
 sub.a  > 8,> -9
 mov.f  { -4,* 0
 jmp.b  # -3,< -7
+mod.ab > 0,< 5
 end;

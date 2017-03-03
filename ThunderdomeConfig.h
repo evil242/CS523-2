@@ -61,3 +61,6 @@ static int max_number_size=10;
 static int max_instructions=10;
 
 /********************/
+int a_random_integer(int);
+
+int a_random_number(int);

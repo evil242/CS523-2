@@ -1,15 +1,6 @@
 /*** File obj_war.c ***/
 #include "obj_war.h"
 
-int a_random_integer(int range){
-        return (int)range-(rand()%(range*2));
-}
-
-int a_random_number(int range) {
-
-        return (int)rand()%range;
-}
-
 
 
 string Warrior::new_line_of_code(){

@@ -2,4 +2,4 @@
 ;name plant
 ;assert CORESIZE == 8000
 spl.x  #  0,#  0
-end
+;end

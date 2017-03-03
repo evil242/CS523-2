@@ -69,6 +69,12 @@ class Warrior {  // individual
 
   public:
      Warrior(string n, int sn);
+     //start cross over operations
+     //direct assignment 
+     Warrior& operator=(const Warrior&);
+     //cross over
+     Warrior& operator+(const Warrior&, const Warrior&);
+
      void fprint(FILE * file);
      void fprint();
      void print();

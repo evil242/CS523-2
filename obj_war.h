@@ -14,6 +14,12 @@ class Warrior {  // individual
      //cross over
      Warrior& operator+(const Warrior&);
 
+     //Say My Name
+     const char *SMNB() { return fname.c_str();};
+
+     //increase Rank
+     void scores(int w) { rank += w; };
+
      void Mutation();
 
      void fprint(FILE * file);

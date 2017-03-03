@@ -13,7 +13,8 @@ int a_random_number(int range) {
 
 
 string Warrior::new_line_of_code(){
-      //sprintf(new_line,"%s%s %s%3d,%s%3d",
+
+      // creates new string of "opcode.opmod addrmode #,addrmode #"
      string new_line =  opcodes[rand()%number_of_opcodes] +
                         modifiers[rand()%number_of_modifiers] + " " +
                         address_modes[rand()%number_of_address_modes] + " " +
@@ -148,8 +149,9 @@ Warrior &Warrior::operator=(const Warrior &rhs) {
   rank = 0;
 
   loc = rhs.loc;
-
   body = rhs.body;
+
+  return *this;
 }
 
 

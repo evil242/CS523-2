@@ -7,6 +7,12 @@ jason@ezmo.com
 http://corewar.co.uk/boer/ga_war.c
 
 
+compiles and runs on UNM CS ubuntu systems
+
+compile via make 
 
 ga_war creates a single warrior and cycles through validattion until
  it runs against plant.red
+
+to run
+  $ ./ga_war

@@ -93,18 +93,19 @@ Modified for Warrior class
 
 
 Warrior::Warrior(string n, int sn)
-: rank(0), serno(sn), loc(0) {
+: rank(0), serno(sn) {
   tail = "end;";
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
 
   fname = n + "_" + to_string(serno) + ".red";
 
   do {
+    loc=0;
+    body.clear();
     for(int i=0; i<10; i++) {
-      body[i] = new_line_of_code();
-      loc = i+1;
+      body.push_back(new_line_of_code());
+      loc++;
     }
-    fprint();
   } while (test_viable() ==0);
    	
 }
@@ -132,6 +133,15 @@ void Warrior::print() {
     cout << tail << endl;
 }
 
+// This replaces file_copy
+// and straight_replace
+Warrior &Warrior::operator=(const Warrior &rhs) {
+  header = rhs.header;
+  rank = 0;
+  loc = rhs.loc;
+  //for (int i = 0; i<loc; i++ {
+     body = rhs.body;
+}
 
 
 int main () {
@@ -145,6 +155,10 @@ int main () {
       tribe[i].print();
     }
     cout << "Tribe size " << tribe.size() << endl;
+      tribe[4] = tribe[0];
+    for (i=0; i<tribe.size(); i++) {
+      tribe[i].print();
+    }
 
 }
 

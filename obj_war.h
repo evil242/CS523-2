@@ -68,12 +68,15 @@ static int max_instructions=10;
 class Warrior {  // individual 
 
   public:
+     // generate new lines of code;
      Warrior(string n, int sn);
+     // constructor used for new copy
+     Warrior();
      //start cross over operations
      //direct assignment 
      Warrior& operator=(const Warrior&);
      //cross over
-     Warrior& operator+(const Warrior&, const Warrior&);
+     Warrior& operator+(const Warrior&);
 
      void fprint(FILE * file);
      void fprint();
@@ -90,7 +93,8 @@ class Warrior {  // individual
 	string fname;
 	int rank;
 	int serno;
-	string body[20];
+	vector<string> body;
+	//string body[20];
         int loc;
 	string tail;
 

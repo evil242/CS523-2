@@ -65,7 +65,7 @@ Modified for Warrior class
 
 
         /*test with plant*/
-        sprintf(command,"pmars -b -o plant.red %s > temp.txt",fname.c_str());
+        sprintf(command,"./pmars -b -o plant.red %s > temp.txt",fname.c_str());
 
         system(command);
 

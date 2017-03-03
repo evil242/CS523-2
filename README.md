@@ -24,7 +24,20 @@ Files:
   ThunderdomeConfig.h  - all the static variables including sys specs,
                          opt codes, opt mods, etc.
 
-  obj_war.h 
+  obj_war.h  - header file for the Warrior class definitions go here
+ 
+  obj_war.c++ - function code for Warrior class goes here
+
+  WarriorMain.c++ - Main() and random_assist() functions go here
+
+  pmars - non-x version needs to be in CWD
+
+  plant.red - base simple warrior
+
+  Makefile - creates .o and target ga_war exec, 
+             creates plant.red if clenaed
+             clean: rm's *.o ga_war *.red
+
 
 
 Important Private variables:

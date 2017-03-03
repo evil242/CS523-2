@@ -18,6 +18,15 @@ ga_war creates a single warrior and cycles through validation until
 The primise of the warrior class is that it creates a warrior with 
 initial random lines of code (need to add seed to random other wise same code).
 
+
+Files:
+  WarriorMain.c++ - Contains Main() function to kick everything off
+  ThunderdomeConfig.h  - all the static variables including sys specs,
+                         opt codes, opt mods, etc.
+
+  obj_war.h 
+
+
 Important Private variables:
 
     header - essentail information for start of .red file

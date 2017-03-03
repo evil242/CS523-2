@@ -127,6 +127,7 @@ void Warrior::fprint() {
 
 void Warrior::print() {
     cout << header;
+    cout << ";Rank " << rank << endl;
     cout << ";name " << fname << endl;
     for(int i=0; i<loc; i++) {
       cout << body[i];
@@ -137,7 +138,7 @@ void Warrior::print() {
 // This replaces file_copy
 // and straight_replace
 Warrior &Warrior::operator=(const Warrior &rhs) {
-  rank = 0;
+  //rank = 0;
 
   loc = rhs.loc;
   body = rhs.body;

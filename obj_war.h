@@ -6,12 +6,14 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string>
+#include <vector>
+using std::vector;
 using std::string;
 using std::cout;
 using std::ofstream;
 using std::ifstream;
 using std::endl;
-//using std::to_string;
+using std::to_string;
 using namespace std;
 
 /********************/
@@ -43,7 +45,7 @@ static char path_symbol[32]="";
 
 static int create_new_population=1;
 static char population_name[32]="";
-static int population_size=25;
+static int population_size=5;
 
 static int starting_cycle=0;
 static int number_of_cycles=250;

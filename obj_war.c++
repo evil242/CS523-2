@@ -164,6 +164,7 @@ Warrior &Warrior::operator=(const Warrior &rhs) {
 
   loc = rhs.loc;
   body = rhs.body;
+  rank = rhs.rank;
 
   return *this;
 }

@@ -20,6 +20,9 @@ class Warrior {  // individual
      //Say My Name
      const char *SMNB() { return fname.c_str();};
 
+     //Say My Rank
+     int SMR() { return rank;};
+
      //increase Rank
      void scores(int w) { rank += w; };
 

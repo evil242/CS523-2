@@ -125,6 +125,15 @@ Warrior::Warrior(long gen, string n, int sn)
 
 }
 
+Warrior::Warrior()
+  : rank(0) {
+  body.clear();
+  fname = "temp.red";
+  header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
+  tail = "end;";
+
+}
+
 void Warrior::fprint() {
     ofstream fileh(fname.c_str());
     fileh << header;
@@ -161,7 +170,32 @@ Warrior &Warrior::operator=(const Warrior &rhs) {
 
 
 Warrior &Warrior::operator+(const Warrior &rhs) {
+    // loop incr
+    int i;
+    int this_size = body.size();
+    int rhs_size = rhs.body.size();
 
+    int thismid = this_size/2;
+    int rhsmid = rhs_size/2;
 
+    Warrior *newar = new Warrior;
+     
+    for (i=0; i<thismid; i++) {
+    	newar->body.push_back(body[i]);
+    }
+    for (i=rhsmid; i<rhs_size; i++) {
+    	newar->body.push_back(rhs.body[i]);
+   } 
+   newar->loc=newar->body.size();
+
+   newar->print();
+  
+   // did warrior come alive?
+       i=thismid;
+   while (newar->test_viable() ==0 && i < newar->loc){   // keep tweeking body until it works
+       newar->body[i] = body[i]; 
+       i++;
+   }
+
+   return *newar;
 }
-

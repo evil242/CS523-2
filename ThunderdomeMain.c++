@@ -313,6 +313,8 @@ void mixMatch (vector<Warrior> &tribe, string name) {
 
 int main () {
 
+   srand(time(NULL));
+
     int i; //for counting dont forget to init
 
     string tribe_name = "dd";
@@ -336,16 +338,32 @@ int main () {
     cout << "Tribe size " << tribe.size() << endl;
     //mixMatch(tribe, tribe_name);
     // printf("Tribe Size = %lu\n", tribe.size());
-    for (i=starting_cycle; i<number_of_cycles; i++) {
+  /*  for (i=starting_cycle; i<number_of_cycles; i++) {
       mixMatch(tribe, tribe_name);
       Bartertown(tribe);
       }
-    
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 
     for (i=0; i<tribe.size(); i++) {
       tribe[i].print();
       }
+
+   */ 
+     tribe[4].print();
+     tribe[4] = tribe[0] + tribe[1];
+     tribe[0].print();
+     tribe[1].print();
+     tribe[4].print();
+     tribe[4].test_viable();
+
+     tribe[3].print();
+     tribe[3] = tribe[1] + tribe[0];
+     tribe[0].print();
+     tribe[1].print();
+     tribe[3].print();
+     tribe[3].test_viable();
+     
+     
 
 
     return 0;

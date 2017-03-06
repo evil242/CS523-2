@@ -7,6 +7,8 @@
 #define  LOSS     -1
 #define TIE     0
 
+
+
 int a_random_integer(int range){
         return (int)range-(rand()%(range*2));
 }
@@ -267,18 +269,18 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
   int size = tribe.size();
   for(i=0; i<size; i++){
     c = tribe[i];
-    d = tribe[i];  
+    //   d = tribe[i];  
     c.serno = sn;
     c.fname = name + "_" + to_string(c.serno) + ".red";
-    d.serno = sn + 1;
-    d.fname = name + "_" + to_string(d.serno) + ".red";
+    // d.serno = sn + 1;
+    // d.fname = name + "_" + to_string(d.serno) + ".red";
   
     for(j=0;  j<size; i++) {
       k = rand() % size;
       c.body[k] = tribe[k].body[k];
-      d.body[j] = tribe[k].body[k];
+      // d.body[j] = tribe[k].body[k];
       if( c.test_viable()) tribe.push_back(c);
-      if(d.test_viable()) tribe.push_back(d);
+      // if(d.test_viable()) tribe.push_back(d);
      }
   }
 
@@ -290,7 +292,7 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
     // printf("TEST C = \n");
     //c.print();
 }*/
-/*
+
 void mixMatch (vector<Warrior> &tribe, string name) {
   int i;
   int j;
@@ -305,25 +307,9 @@ void mixMatch (vector<Warrior> &tribe, string name) {
       size+=2;
     }
   }
-} */
-
-
-void mixMatch (vector<Warrior> &tribe) {
-  int i;
-  int count = tribe.size() - 1;
-  int size = tribe.size();
-  int midpoint = size / 2;
-  int j=count;
-  for(i=0; i<midpoint; i+=2){
-
-      tribe[j-1].print();
-      tribe[j-1] = tribe[i] + tribe[i+1];
-      tribe[j-1].print();
-      tribe[j] = tribe[i+1] + tribe[i];
-      j -=2;
-
-  }
 }
+
+
 
 
 int main () {
@@ -357,7 +343,6 @@ int main () {
       //mixMatch(tribe, tribe_name);
       Bartertown(tribe);
       BottomUpMergeSort(tribe);
-      mixMatch(tribe);
       }
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 

@@ -161,7 +161,6 @@ void Warrior::print() {
 // and straight_replace
 Warrior &Warrior::operator=(const Warrior &rhs) {
   //rank = 0;
-
   loc = rhs.loc;
   body = rhs.body;
   rank = rhs.rank;
@@ -180,6 +179,9 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
     int rhsmid = rhs_size/2;
 
     Warrior *newar = new Warrior;
+
+    //print();
+    rhs.print();
      
     for (i=0; i<thismid; i++) {
     	newar->body.push_back(body[i]);
@@ -189,14 +191,16 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
    } 
    newar->loc=newar->body.size();
 
-   newar->print();
   
    // did warrior come alive?
-       i=thismid;
-   while (newar->test_viable() ==0 && i < newar->loc){   // keep tweeking body until it works
+      i=thismid;
+   // keep tweeking body until it works
+   while (newar->test_viable() == 0 && i < newar->loc){   
        newar->body[i] = body[i]; 
        i++;
    }
+
+   newar->print();
 
    return *newar;
 }

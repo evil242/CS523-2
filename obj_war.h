@@ -26,15 +26,9 @@ class Warrior {  // individual
 
      //Say My Rank
      int SMR() { return rank;};
-<<<<<<< HEAD
-=======
 
      //increase Rank
      void scores(int w) { rank += w; };
->>>>>>> dfd9c764c644cf85911a025aa42fa0d26369b559
-
-     //increase Rank
-     void scores(int w) { rank += w; };;
 
      void fprint(FILE * file);
      void fprint();

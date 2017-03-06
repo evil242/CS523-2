@@ -11,8 +11,11 @@ plant.red:
 obj_war.o: obj_war.c++ obj_war.h ThunderdomeConfig.h
 	g++ -std=c++11 -c obj_war.c++
 
-ga_war: plant.red obj_war.o ThunderdomeMain.c++
-	g++ -std=c++11 -o ga_war ThunderdomeMain.c++ obj_war.o
+Sorting.o: Sorting.h Sorting.c obj_war.c++ obj_war.h ThunderdomeConfig.h
+	g++ -std=c++11 -c Sorting.c
+
+ga_war: plant.red obj_war.o ThunderdomeMain.c++ Sorting.o
+	g++ -std=c++11 -o ga_war ThunderdomeMain.c++ obj_war.o Sorting.o
 
 
 clean:

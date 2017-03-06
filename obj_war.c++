@@ -199,3 +199,44 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
 
    return *newar;
 }
+
+Warrior &Warrior::operator*(const Warrior &rhs) {
+  // loop incr
+  int i;
+  int this_size = body.size();
+  int rhs_size = rhs.body.size();
+  int j = rand() % rhs_size;
+
+  Warrior *newar = new Warrior;
+
+  for (i=0; i<body.size(); i++) {
+    newar->body.push_back(body[i]);
+  }
+
+  newar->body[j]= rhs.body[j];
+ 
+  newar->loc=newar->body.size();
+
+  newar->print();
+
+  // did warrior come alive?
+  i=0;
+  while (newar->test_viable() ==0 && i < newar->loc){   // keep tweeking body \ until it works
+      newar->body[i] = body[i];
+    i++;
+  }
+
+  return *newar;
+}
+void Warrior::Mutation() {
+  int this_size = body.size();
+  int i;
+  
+  //tweek body unit it works
+  do {
+    i = rand() % this_size;
+    body[i] = new_line_of_code();
+    
+  } while (test_viable() ==0);
+   
+}

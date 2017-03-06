@@ -268,18 +268,18 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
   int size = tribe.size();
   for(i=0; i<size; i++){
     c = tribe[i];
-    d = tribe[i];  
+    //   d = tribe[i];  
     c.serno = sn;
     c.fname = name + "_" + to_string(c.serno) + ".red";
-    d.serno = sn + 1;
-    d.fname = name + "_" + to_string(d.serno) + ".red";
+    // d.serno = sn + 1;
+    // d.fname = name + "_" + to_string(d.serno) + ".red";
   
     for(j=0;  j<size; i++) {
       k = rand() % size;
       c.body[k] = tribe[k].body[k];
-      d.body[j] = tribe[k].body[k];
+      // d.body[j] = tribe[k].body[k];
       if( c.test_viable()) tribe.push_back(c);
-      if(d.test_viable()) tribe.push_back(d);
+      // if(d.test_viable()) tribe.push_back(d);
      }
   }
 

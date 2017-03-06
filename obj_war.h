@@ -10,20 +10,22 @@ class Warrior {  // individual
      Warrior();
      //constructor used for crossover or mutation
      Warrior(long gen, string n, int sn);
+     //constructor for mutation
+     void Mutation();
      //start cross over operations
      
      //direct assignment 
      Warrior& operator=(const Warrior&);
-     //cross over
+     //cross over uniform
      Warrior& operator+(const Warrior&);
+     //1-point crossover
+     Warrior& operator*(const Warrior&);
 
      //Say My Name
      const char *SMNB() { return fname.c_str();};
 
      //increase Rank
-     void scores(int w) { rank += w; };
-
-     void Mutation();
+     void scores(int w) { rank += w; };;
 
      void fprint(FILE * file);
      void fprint();

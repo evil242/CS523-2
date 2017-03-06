@@ -76,6 +76,7 @@ int Thunderdome(Warrior A, Warrior B){
 
 }
 
+/*
 void Bartertown(vector<Warrior> &tribe) {
   int source_number;
   int target_number;
@@ -86,7 +87,7 @@ void Bartertown(vector<Warrior> &tribe) {
 
   int i = -1;
   int j;
-  /*index through whole population*/
+  //index through whole population
   while (tribe.size()>population_size) {
     j = tribe.size()-1;
     if(i >= j){
@@ -96,7 +97,7 @@ void Bartertown(vector<Warrior> &tribe) {
     printf("Tribe size = %d\n", j);
     printf("i = %d\n", i);
     // j = tribe.size()-1;
-    /*pick a target*/
+    //pick a target
     Warrior a = tribe[i];
     Warrior b = tribe[j];
 
@@ -106,7 +107,6 @@ void Bartertown(vector<Warrior> &tribe) {
     case  TOTAL_WIN   :
       //tribe[source_number] [One Man] leaves the Thunderdome
       tribe[i].scores(2);
-      tribe[i].rank+=2;
       tribe.pop_back();
       //straight replace B with A
       
@@ -116,21 +116,18 @@ void Bartertown(vector<Warrior> &tribe) {
       //tribe[target_number] [One Man] leaves the Thunderdome
       tribe[j].scores(2);
       //straight replace A with B
-      tribe[j].rank+=2;
       tribe[i] = tribe[j];
       tribe.pop_back();
       break;
 
     case  WIN :
       tribe[i].scores(1);
-      tribe[i].rank++;
       tribe.pop_back();
       //create_successor(source_name,target_name);
       break;
 
     case  LOSS :
       tribe[j].scores(1);
-      tribe[j].rank++;
       tribe[i] = tribe[j];
       tribe.pop_back();
       //create_successor(target_name,source_name);
@@ -149,18 +146,17 @@ void Bartertown(vector<Warrior> &tribe) {
       break;
     default  :
       break;
-    }/*switch*/
+    }//switch
 
 
 
 
-  } /*for pop*/
+  } //for pop
 
 
+}*/
 
-}
 
-/*
 void Bartertown(vector<Warrior> &tribe) {
    int source_number;
    int target_number;
@@ -224,9 +220,15 @@ void Bartertown(vector<Warrior> &tribe) {
 
 	
 
-	} */
+} 
 
-void crossover1(Warrior a, Warrior b, Warrior c, Warrior d,
+void Sort(vector<Warrior> &tribe) {
+
+
+}
+
+
+/*void crossover1(Warrior a, Warrior b, Warrior c, Warrior d,
 		vector<Warrior> &tribe, string name, int sn) {
   int i;
   int j;
@@ -290,7 +292,7 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
     // b.print();
     // printf("TEST C = \n");
     //c.print();
-}
+}*/
 
 void mixMatch (vector<Warrior> &tribe, string name) {
   int i;
@@ -301,7 +303,7 @@ void mixMatch (vector<Warrior> &tribe, string name) {
   int size = tribe.size();
   for(i=0; i<count -1; i++){
     for(j=i+1; j <count; j++){
-      crossover1(tribe[i], tribe[j], c, d, tribe, name, size);
+      //crossover1(tribe[i], tribe[j], c, d, tribe, name, size);
       // crossover2(tribe[i], tribe[j], c, d, tribe, name, size);
       size+=2;
     }
@@ -338,8 +340,8 @@ int main () {
     cout << "Tribe size " << tribe.size() << endl;
     //mixMatch(tribe, tribe_name);
     // printf("Tribe Size = %lu\n", tribe.size());
-  /*  for (i=starting_cycle; i<number_of_cycles; i++) {
-      mixMatch(tribe, tribe_name);
+    for (i=starting_cycle; i<number_of_cycles; i++) {
+      //mixMatch(tribe, tribe_name);
       Bartertown(tribe);
       }
     //printf("Tribe Size = %lu\n", tribe.size());
@@ -348,8 +350,8 @@ int main () {
       tribe[i].print();
       }
 
-   */ 
-     tribe[4].print();
+    
+/*     tribe[4].print();
      tribe[4] = tribe[0] + tribe[1];
      tribe[0].print();
      tribe[1].print();
@@ -362,7 +364,7 @@ int main () {
      tribe[1].print();
      tribe[3].print();
      tribe[3].test_viable();
-     
+*/     
      
 
 

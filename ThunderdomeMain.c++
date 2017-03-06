@@ -1,14 +1,11 @@
 #include "obj_war.h"
+#include "Sorting.h"
 
 #define TOTAL_WIN  2
 #define TOTAL_LOSS   -2
 #define  WIN       1
 #define  LOSS     -1
 #define TIE     0
-
-void BottomUpMergeSort(vector<Warrior> &);
-void BottomUpMerge(vector<Warrior> &,int, int, int, vector<Warrior> &);
-void CopyTribe(vector<Warrior> &, vector<Warrior> &, int);
 
 int a_random_integer(int range){
         return (int)range-(rand()%(range*2));
@@ -226,40 +223,6 @@ void Bartertown(vector<Warrior> &tribe) {
 
 } 
 
-//ganked and modified from Wiki
-void BottomUpMergeSort(vector<Warrior> &TribeA) {
-
-  int n = TribeA.size();
-
-  vector<Warrior> TribeB = TribeA;
-
-  for (int width = 1; width < n; width = 2 * width) {
-  	for (int i = 0; i < n; i = i + 2 * width) {
-		BottomUpMerge(TribeA, i, min(i+width, n), min(i+2*width,n), TribeB);
-	}
-
-
-	CopyTribe(TribeB,TribeA,n);
-   }
-}
-
-void BottomUpMerge(vector<Warrior> &TribeA,int iLeft, int iRight, int iEnd, vector<Warrior> &TribeB) {
-	int i = iLeft; int j = iRight;
-	for (int k = iLeft; k < iEnd; k++) {
-		if (i < iRight && (j >= iEnd || TribeA[i].SMR() >= TribeA[j].SMR())) {
-			TribeB[k] = TribeA[i];
-			i++;
-		} else {
-			TribeB[k] = TribeA[i];
-			j++;
-		}
-	}
-}
-
-void CopyTribe(vector<Warrior> &TribeB, vector<Warrior> &TribeA, int n) {
-	for (int i = 0; i < n; i++ ) 
-		TribeA[i] = TribeB[i];
-}
 
 
 /*void crossover1(Warrior a, Warrior b, Warrior c, Warrior d,
@@ -304,18 +267,18 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
   int size = tribe.size();
   for(i=0; i<size; i++){
     c = tribe[i];
-    //   d = tribe[i];  
+    d = tribe[i];  
     c.serno = sn;
     c.fname = name + "_" + to_string(c.serno) + ".red";
-    // d.serno = sn + 1;
-    // d.fname = name + "_" + to_string(d.serno) + ".red";
+    d.serno = sn + 1;
+    d.fname = name + "_" + to_string(d.serno) + ".red";
   
     for(j=0;  j<size; i++) {
       k = rand() % size;
       c.body[k] = tribe[k].body[k];
-      // d.body[j] = tribe[k].body[k];
+      d.body[j] = tribe[k].body[k];
       if( c.test_viable()) tribe.push_back(c);
-      // if(d.test_viable()) tribe.push_back(d);
+      if(d.test_viable()) tribe.push_back(d);
      }
   }
 
@@ -327,7 +290,7 @@ void crossover2(Warrior a, Warrior b, Warrior c, Warrior d,
     // printf("TEST C = \n");
     //c.print();
 }*/
-
+/*
 void mixMatch (vector<Warrior> &tribe, string name) {
   int i;
   int j;
@@ -342,9 +305,22 @@ void mixMatch (vector<Warrior> &tribe, string name) {
       size+=2;
     }
   }
+} */
+
+
+void mixMatch (vector<Warrior> &tribe) {
+  int i;
+  int count = tribe.size() - 1;
+  int size = tribe.size();
+  int midpoint = size / 2;
+  int j=count;
+  for(i=0; i<midpoint; i+=2){
+      tribe[j-1] = tribe[i] + tribe[i+1];
+      tribe[j] = tribe[i+1] + tribe[i];
+      j -=2;
+
+  }
 }
-
-
 
 
 int main () {
@@ -378,6 +354,7 @@ int main () {
       //mixMatch(tribe, tribe_name);
       Bartertown(tribe);
       BottomUpMergeSort(tribe);
+      mixMatch(tribe);
       }
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 

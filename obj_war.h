@@ -24,6 +24,9 @@ class Warrior {  // individual
      //Say My Name
      const char *SMNB() { return fname.c_str();};
 
+     //Say My Rank
+     int SMR() { return rank;};
+
      //increase Rank
      void scores(int w) { rank += w; };;
 
@@ -31,20 +34,17 @@ class Warrior {  // individual
      void fprint();
      void print();
      int test_viable();
-     vector<string> body;
-     long generation;
-     int serno;
-     string fname;
-     int rank;
+
   private:
         static char new_line[256];
         string new_line_of_code(void);
 
+        long generation;
   	string header;
-	//string fname;
-	//int rank;
-	//int serno;
-	//vector<string> body;
+	string fname;
+	int rank;
+	int serno;
+	vector<string> body;
 	//string body[20];
         int loc;
 	string tail;

@@ -45,7 +45,7 @@ static char path_symbol[32]="";
 
 static int create_new_population=1;
 static char population_name[32]="";
-static int population_size=5;
+static int population_size=10;
 
 static int starting_cycle=0;
 static int number_of_cycles=10;
@@ -64,3 +64,4 @@ static int max_instructions=10;
 int a_random_integer(int);
 
 int a_random_number(int);
+

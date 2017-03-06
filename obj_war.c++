@@ -110,7 +110,20 @@ Warrior::Warrior(string n, int sn)
   } while (test_viable() ==0);  // keep creating body until it works
    	
 }
+//Warrior constructor for new Warrior child
+Warrior::Warrior(long gen, string n, int sn)
+  : rank(0), serno(sn) {
 
+  header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
+  tail = "end;";
+
+  fname = n + "_" + to_string(serno) + ".red";
+  generation = gen;
+
+ 
+  // test_viable();
+
+}
 
 void Warrior::fprint() {
     ofstream fileh(fname.c_str());

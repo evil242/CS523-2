@@ -181,7 +181,7 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
     Warrior *newar = new Warrior;
 
     //print();
-    rhs.print();
+    //rhs.print();
      
     for (i=0; i<thismid; i++) {
     	newar->body.push_back(body[i]);

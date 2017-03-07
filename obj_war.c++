@@ -195,11 +195,9 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
    // did warrior come alive?
       i=thismid;
    // keep tweeking body until it works
-      if(newar->test_viable() == 0) {
-	while (i < newar->loc){   
+      while(newar->test_viable() == 0 && i < newar->loc){   
         newar->body[i] = body[i]; 
         i++;
-	}
       }
 
    //newar->print();
@@ -232,16 +230,15 @@ Warrior &Warrior::operator*(const Warrior &rhs) {
   newar->print();
 
   // did warrior come alive? If not return to old body
-  i=0;
-  if(newar->test_viable() ==0){
-    while(i < newar->loc){
+    i=0;
+    while(newar->test_viable() == 0 && i < newar->loc){   
       newar->body[i] = body[i];
       i++;
     }
-  }
 
   return *newar;
 }
+
 void Warrior::Mutation() {
   int this_size = body.size();
   int i;

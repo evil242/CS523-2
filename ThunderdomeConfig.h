@@ -18,6 +18,12 @@ using namespace std;
 
 /********************/
 
+#define NOCROSS 0
+#define ONEPTCROSS 1
+#define UNIFORMCROSS 2
+
+static int CrossType=0; //NOCROSS
+
 static unsigned long NumOWilkies=12;
 
 static string WilkiesBenchDir="WilkiesBench";

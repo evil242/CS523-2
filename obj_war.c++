@@ -87,7 +87,7 @@ Modified for Warrior class
 //  Takes String n "simple name eg dt, or dd"
 // and serial number sn eg 0-9 for pop of 10
 Warrior::Warrior(string n, int sn)
-: rank(0), serno(sn) {
+: TribeRank(0), serno(sn) {
 
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
   tail = "end;";
@@ -112,7 +112,7 @@ Warrior::Warrior(string n, int sn)
 }
 //Warrior constructor for new Warrior child
 Warrior::Warrior(long gen, string n, int sn)
-  : rank(0), serno(sn) {
+  : TribeRank(0), serno(sn) {
 
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
   tail = "end;";
@@ -126,7 +126,7 @@ Warrior::Warrior(long gen, string n, int sn)
 }
 
 Warrior::Warrior()
-  : rank(0) {
+  : TribeRank(0) {
   body.clear();
   fname = "temp.red";
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
@@ -149,7 +149,7 @@ void Warrior::fprint() {
 
 void Warrior::print() {
     cout << header;
-    cout << ";Rank " << rank << endl;
+    cout << ";Rank " << TribeRank << endl;
     cout << ";name " << fname << endl;
     for(int i=0; i<loc; i++) {
       cout << body[i];
@@ -160,10 +160,9 @@ void Warrior::print() {
 // This replaces file_copy
 // and straight_replace
 Warrior &Warrior::operator=(const Warrior &rhs) {
-  //rank = 0;
+  //TribeRank = 0;
   loc = rhs.loc;
   body = rhs.body;
-  rank = rhs.rank;
 
   return *this;
 }
@@ -266,16 +265,16 @@ void Warrior::PutMeInCoach() {
    int b_score=0;
 
    const char * aname = fname.c_str();
-   const char * bname;
+   string bname;
 
    fprint();
 
    for (int BMtest=0; BMtest < NumOWilkies; BMtest++) {
-     bname = WilkiesBench[BMtest].c_str();
+     bname = WilkiesBenchDir + "//" + WilkiesBench[BMtest]; 
 
 
       sprintf(command, "./pmars -r %d -b -o %s %s > temp.txt",
-                                   number_of_battles,aname,bname);
+                                number_of_battles,aname,bname.c_str());
    
       system(command);
    
@@ -307,7 +306,7 @@ void Warrior::PutMeInCoach() {
    
       fclose(file);
    
-      printf("^^^^^%9s %9s:%d %d\n",aname,bname,a_score,b_score);
+      printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
    
       
          if (a_score>=(3*number_of_battles)) BenchmarkFit += 3;

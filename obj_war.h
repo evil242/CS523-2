@@ -24,14 +24,12 @@ class Warrior {  // individual
      //Say My Name
      const char *SMNB() { return fname.c_str();};
 
-     //Say My Rank
-     int SMR() { return rank;};
-
-     //Say My Rank
-     int SMBM() { return BenchmarkFit; };
 
      //increase Rank
-     void scores(int w) { rank += w; };
+     void scores(int w) { TribeRank += w; };
+     void reset_scores() { TribeRank = 0; };
+     //Say My Rank
+     int SMR() { return TribeRank;};
 
      void fprint(FILE * file);
      void fprint();
@@ -40,6 +38,11 @@ class Warrior {  // individual
 
      // run a benchmark
      void PutMeInCoach();
+     //Say My BenchMarkFitness
+     int SMBMF() { return BenchmarkFit; };
+     int ResetBMF() { BenchmarkFit=0; };
+
+     int TwoFit() { return BenchmarkFit+TribeRank; };
 
   private:
         static char new_line[256];
@@ -49,7 +52,7 @@ class Warrior {  // individual
   	string header;
 	string fname;
         int BenchmarkFit;
-	int rank;
+	int TribeRank;
 	int serno;
 	vector<string> body;
 	//string body[20];

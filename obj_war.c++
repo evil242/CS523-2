@@ -168,7 +168,7 @@ Warrior &Warrior::operator=(const Warrior &rhs) {
   return *this;
 }
 
-
+//1-point crossover p =5
 Warrior &Warrior::operator+(const Warrior &rhs) {
     // loop incr
     int i;
@@ -195,40 +195,47 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
    // did warrior come alive?
       i=thismid;
    // keep tweeking body until it works
-   while (newar->test_viable() == 0 && i < newar->loc){   
-       newar->body[i] = body[i]; 
-       i++;
-   }
+      if(newar->test_viable() == 0) {
+	while (i < newar->loc){   
+        newar->body[i] = body[i]; 
+        i++;
+	}
+      }
 
    newar->print();
 
    return *newar;
 }
-
+//uniform crossover probability = 0.5
 Warrior &Warrior::operator*(const Warrior &rhs) {
   // loop incr
   int i;
   int this_size = body.size();
   int rhs_size = rhs.body.size();
-  int j = rand() % rhs_size;
-
+  int j;
+                     
   Warrior *newar = new Warrior;
 
   for (i=0; i<body.size(); i++) {
+    
     newar->body.push_back(body[i]);
   }
-
-  newar->body[j]= rhs.body[j];
- 
+  for(i=0; i<rhs_size; i++) {
+    if(rand() % 2) {
+      newar->body[i]= rhs.body[i];
+    }
+  }
   newar->loc=newar->body.size();
 
   newar->print();
 
-  // did warrior come alive?
+  // did warrior come alive? If not return to old body
   i=0;
-  while (newar->test_viable() ==0 && i < newar->loc){   // keep tweeking body \ until it works
+  if(newar->test_viable() ==0){
+    while(i < newar->loc){
       newar->body[i] = body[i];
-    i++;
+      i++;
+    }
   }
 
   return *newar;

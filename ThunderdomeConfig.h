@@ -18,6 +18,16 @@ using namespace std;
 
 /********************/
 
+static unsigned long NumOWilkies=12;
+
+static string WilkiesBenchDir="WilkiesBench";
+
+static string WilkiesBench[]={\
+		"BLUEFUNK.RED", "FSTORM.RED", "MARCIA13.RED",\
+		"PAPERONE.RED", "RAVE.RED","TIME.RED",\
+		"CANNON.RED","IRONGATE.RED","NOBODY.RED",\
+		"PSWING.RED","THERMITE.RED","TORNADO.RED"};
+
 static unsigned long number_of_opcodes=17;
 
 static string opcodes[]={\
@@ -26,6 +36,7 @@ static string opcodes[]={\
                 "jmz","jmn","djn","spl",\
                 "slt","cmp","seq","sne",\
                 "nop"};
+
 
 static unsigned long number_of_modifiers=7;
 

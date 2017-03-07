@@ -27,6 +27,9 @@ class Warrior {  // individual
      //Say My Rank
      int SMR() { return rank;};
 
+     //Say My Rank
+     int SMBM() { return BenchmarkFit; };
+
      //increase Rank
      void scores(int w) { rank += w; };
 
@@ -35,6 +38,9 @@ class Warrior {  // individual
      void print();
      int test_viable();
 
+     // run a benchmark
+     void PutMeInCoach();
+
   private:
         static char new_line[256];
         string new_line_of_code(void);
@@ -42,6 +48,7 @@ class Warrior {  // individual
         long generation;
   	string header;
 	string fname;
+        int BenchmarkFit;
 	int rank;
 	int serno;
 	vector<string> body;

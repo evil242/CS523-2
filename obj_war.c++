@@ -108,7 +108,7 @@ Warrior::Warrior(string n, int sn)
 
    // did warrior come alive?
   } while (test_viable() ==0);  // keep creating body until it works
-   	
+      
 }
 //Warrior constructor for new Warrior child
 Warrior::Warrior(long gen, string n, int sn)
@@ -184,10 +184,10 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
     //rhs.print();
      
     for (i=0; i<thismid; i++) {
-    	newar->body.push_back(body[i]);
+       newar->body.push_back(body[i]);
     }
     for (i=rhsmid; i<rhs_size; i++) {
-    	newar->body.push_back(rhs.body[i]);
+       newar->body.push_back(rhs.body[i]);
    } 
    newar->loc=newar->body.size();
 
@@ -250,4 +250,71 @@ void Warrior::Mutation() {
     
   } while (test_viable() ==0);
    
+}
+
+
+void Warrior::PutMeInCoach() {
+
+
+   FILE * file=0;
+
+   char command[256];
+   char buffer[256]="";
+   char * s_ptr=0;
+
+   int a_score=0;
+   int b_score=0;
+
+   const char * aname = fname.c_str();
+   const char * bname;
+
+   fprint();
+
+   for (int BMtest=0; BMtest < NumOWilkies; BMtest++) {
+     bname = WilkiesBench[BMtest].c_str();
+
+
+      sprintf(command, "./pmars -r %d -b -o %s %s > temp.txt",
+                                   number_of_battles,aname,bname);
+   
+      system(command);
+   
+      if ((file=fopen("temp.txt","r"))==0) exit(0);
+   
+      fgets (buffer,255,file);
+   
+      if (strstr(buffer,aname)==0) {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         b_score=atoi(s_ptr);
+      } else {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         a_score=atoi(s_ptr);
+      }
+   
+      fgets (buffer,255,file);
+   
+      if (strstr(buffer,aname)==0) {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         b_score=atoi(s_ptr);
+      } else {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         a_score=atoi(s_ptr);
+      }
+   
+      fclose(file);
+   
+      printf("^^^^^%9s %9s:%d %d\n",aname,bname,a_score,b_score);
+   
+      
+         if (a_score>=(3*number_of_battles)) BenchmarkFit += 3;
+         if (a_score>b_score) BenchmarkFit += 1;
+   }
+
+
+
+
 }

@@ -202,10 +202,12 @@ Warrior &Warrior::operator+(const Warrior &rhs) {
 	}
       }
 
-   newar->print();
+   //newar->print();
 
    return *newar;
 }
+
+
 //uniform crossover probability = 0.5
 Warrior &Warrior::operator*(const Warrior &rhs) {
   // loop incr

@@ -180,14 +180,14 @@ void Bartertown(vector<Warrior> &tribe) {
             //tribe[source_number] [One Man] leaves the Thunderdome
             tribe[source_number].scores(3);
             //straight replace B with A
-            tribe[target_number] = tribe[source_number];
+            //tribe[target_number] = tribe[source_number];
             break;
 
          case  TOTAL_LOSS :
             //tribe[target_number] [One Man] leaves the Thunderdome
             tribe[target_number].scores(3);
             //straight replace A with B
-            tribe[source_number] = tribe[target_number];
+            //tribe[source_number] = tribe[target_number];
             break;
 
          case  WIN :
@@ -315,11 +315,8 @@ void mixMatch (vector<Warrior> &tribe) {
   int midpoint = size / 2;
   int j=count;
   for(i=0; i<midpoint; i+=2){
-
-      tribe[j-1].print();
-      tribe[j-1] = tribe[i] + tribe[i+1];
-      tribe[j-1].print();
-      tribe[j] = tribe[i+1] + tribe[i];
+      tribe[i] = tribe[j] + tribe[j-1];
+      tribe[i+1] = tribe[j-1] + tribe[j];
       j -=2;
 
   }

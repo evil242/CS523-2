@@ -89,14 +89,14 @@ void setup(void){
          if(strstr(buffer,"SelecType")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
-               create_new_population=atoi(++parm_ptr);
+               SelecType=atoi(++parm_ptr);
             continue;
          }
 
          if(strstr(buffer,"CrossType")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
-               create_new_population=atoi(++parm_ptr);
+               CrossType=atoi(++parm_ptr);
             continue;
          }
 

@@ -11,7 +11,7 @@ plant.red:
 	echo ";redcode-94\n;name plant\n;assert CORESIZE == 8000\nspl.x  #  0,#  0\n;end" >plant.red
 
 ga_war.cfg: 
-	printf ";the form of this must not be changed\n;the parser is very-very-very dumb\n;\n; value can be 0,1, or 2\n; for NONE,ONEPOINT, or UNIFORM CROSSOVER\nCrossType=1; value can be {0,1}\ncreate_new_population=1\n; value must be {n>1} or else\npopulation_size=25\n; value must be {n>1} or else\nnumber_of_cycles=250\n; value must be {n>=0}\nstarting_cycle=0\n; value must be {0<n<100}\nmax_instructions=10\n; value must be {n<=999} \nmax_number_size=10\n; values should be {0...100}\nmutation_rate=25\ninsertion_rate=5\nremoval_rate=5\nresurrection_rate=2\n;value must be {n>0}\nnumber_of_battles=3\n; 2 letters only...dumb\npopulation_name=xx\n; OK, dos use \\ unix use //\npath_symbol=//" > ga_war.cfg
+	printf ";the form of this must not be changed\n;the parser is very-very-very dumb\n;\n; value can be {0,1,2}\n; for NONE,ONEPOINT, or UNIFORM CROSSOVER\nCrossType=1\n; value can be {0,1}\ncreate_new_population=1\n; value must be {n>1} or else\npopulation_size=25\n; value must be {n>1} or else\nnumber_of_cycles=250\n; value must be {n>1} but keep small\nseed_cycles=10\n; value must be {n>=0}\nstarting_cycle=0\n; value must be {0<n<100}\nmax_instructions=10\n; value must be {n<=999} \nmax_number_size=10\n; values should be {0...100}\nmutation_rate=25\ninsertion_rate=5\nremoval_rate=5\nresurrection_rate=2\n;value must be {n>0}\nnumber_of_battles=3\n; 2 letters only...dumb\npopulation_name=DD\n; OK, dos use \\ unix use //\npath_symbol=/" > ga_war.cfg
 
 
 obj_war.o: obj_war.c++ obj_war.h ThunderdomeConfig.h

@@ -150,6 +150,7 @@ void Warrior::fprint() {
 void Warrior::print() {
     cout << header;
     cout << ";Rank " << TribeRank << endl;
+    cout << ";BenchmarkFit " << BenchmarkFit << endl;
     cout << ";name " << fname << endl;
     for(int i=0; i<loc; i++) {
       cout << body[i];
@@ -270,7 +271,7 @@ void Warrior::PutMeInCoach() {
    fprint();
 
    for (int BMtest=0; BMtest < NumOWilkies; BMtest++) {
-     bname = WilkiesBenchDir + "//" + WilkiesBench[BMtest]; 
+     bname = WilkiesBenchDir + "/" + WilkiesBench[BMtest]; 
 
 
       sprintf(command, "./pmars -r %d -b -o %s %s > temp.txt",
@@ -309,8 +310,9 @@ void Warrior::PutMeInCoach() {
       printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
    
       
-         if (a_score>=(3*number_of_battles)) BenchmarkFit += 3;
-         if (a_score>b_score) BenchmarkFit += 1;
+         if (a_score>=(3*number_of_battles)) BenchmarkFit += 5;
+         if (a_score>b_score) BenchmarkFit += 3;
+         if (a_score == b_score) BenchmarkFit += 1;
    }
 
 

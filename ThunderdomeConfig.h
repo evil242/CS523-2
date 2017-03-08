@@ -66,6 +66,7 @@ static int population_size=20;
 
 static int starting_cycle=0;
 static int number_of_cycles=100;
+static int seed_cycles=10;
 
 static int number_of_battles=3;
 

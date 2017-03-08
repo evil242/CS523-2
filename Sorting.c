@@ -27,7 +27,7 @@ void BottomUpMergeSort(vector<Warrior> &TribeA) {
 void BottomUpMerge(vector<Warrior> &TribeA,int iLeft, int iRight, int iEnd, vector<Warrior> &TribeB) {
         int i = iLeft; int j = iRight;
         for (int k = iLeft; k < iEnd; k++) {
-                if (i < iRight && (j >= iEnd || TribeA[i].SMR() <= TribeA[j].SMR())) {
+                if (i < iRight && (j >= iEnd || TribeA[i].TwoFit() <= TribeA[j].TwoFit())) {
                         TribeB[k] = TribeA[i];
                         i++;
                 } else {

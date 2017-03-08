@@ -39,9 +39,10 @@ void setup(void){
    removal_rate=5;
    resurrection_rate=2;
    number_of_battles=3;
+   seed_cycles=10;
 
    strcpy(population_name,"ga");
-   strcpy(path_symbol,"//");
+   strcpy(path_symbol,"/");
 
    /*read config file if there*/
    if (0==(config_file=fopen("ga_war.cfg","r"))){
@@ -81,6 +82,13 @@ void setup(void){
          }
 
          if(strstr(buffer,"number_of_cycles")!=0) {
+            parm_ptr=strstr(buffer,"=");
+            if (parm_ptr!=0)
+               number_of_cycles=atoi(++parm_ptr);
+            continue;
+         }
+
+         if(strstr(buffer,"seed_cycles")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
                number_of_cycles=atoi(++parm_ptr);
@@ -147,7 +155,7 @@ void setup(void){
          if(strstr(buffer,"path_symbol")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
-               strncpy(path_symbol,++parm_ptr,2);
+               strncpy(path_symbol,++parm_ptr,1);
             continue;
          }
 
@@ -248,7 +256,7 @@ void Bartertown(vector<Warrior> &tribe) {
     }
 
   //index through whole population
-  for (source_number=0;source_number<pop_size;source_number++) {
+  for (source_number=0;source_number<pop_size - 1;source_number++) {
 
   /*
    // This while uses random once through population to determine fitness
@@ -257,9 +265,8 @@ void Bartertown(vector<Warrior> &tribe) {
    while (target_number==source_number)
          target_number=(a_random_number(population_size - 1)); */
 
-   for (target_number=0; target_number < pop_size; target_number++) {
-       if (target_number == source_number) target_number++;
-         else {
+   for (target_number=source_number+1; target_number < pop_size; target_number++) {
+       if (target_number != source_number) {
 
             //Two Men Enter
          switch (Thunderdome(tribe[source_number],tribe[target_number])) {
@@ -288,12 +295,63 @@ void Bartertown(vector<Warrior> &tribe) {
       } //for target_number
     }//for source_number
 
-   
-
 } 
 
 
-void RouletSelection (vector<Warrior> &tribe) {
+int RouletSelection (vector<Warrior> &tribe) {
+  int i;
+  int count = tribe.size() - 1;
+  int size = tribe.size();
+  int midpoint = size / 2;
+  int j=count;
+  int sumfit=1; // set to 1 so never div by 0
+  int BPC=0;
+  long prob_i;
+
+  Warrior BPair[2];
+  BPair[0] = tribe[count];
+  BPair[1] = tribe[count-1];
+
+  //Calc Sum(Fit_i)
+  for (i=0; i<count; i++ ) { 
+       sumfit += tribe[i].TwoFit();
+  }
+
+  //Select by Roulet chance for breed Out lower half of pop (sorted by MergeSort)
+        for(i=0; i<midpoint; i+=2){
+          prob_i = 1/rand() ;
+          if((tribe[i].TwoFit() / sumfit) < prob_i ) {
+            switch (CrossType) {
+               case ONEPTCROSS :
+                  tribe[i] = BPair[0] + BPair[1];
+                  break;
+               case UNIFORMCROSS :
+                  tribe[i] = BPair[0] * BPair[1];
+                  break;
+               default : //same as NOCROSS
+                  break;
+            }
+          }
+          if((tribe[i+1].TwoFit() / sumfit) < prob_i ) {
+            switch (CrossType) {
+              case ONEPTCROSS :
+                  tribe[i+1] = BPair[1] + BPair[0];
+                  break;
+               case UNIFORMCROSS :
+                  tribe[i+1] = BPair[1] * BPair[0];
+                  break;
+               default : //same as NOCROSS
+                  break;
+          
+            }
+          }
+        }
+
+  return sumfit;
+}//end RouletSelection
+
+
+int TournSelection (vector<Warrior> &tribe) {
   int i;
   int count = tribe.size() - 1;
   int size = tribe.size();
@@ -341,7 +399,8 @@ void RouletSelection (vector<Warrior> &tribe) {
             }
           }
         }
-}//end RouletSelection
+  return sumfit;
+}//end TournSelection
 
 void mixMatch (vector<Warrior> &tribe) {
   int i;
@@ -358,6 +417,24 @@ void mixMatch (vector<Warrior> &tribe) {
       j -=2;
 
   }
+}
+
+void Oblong(vector<Warrior> &tribe) {
+    int size=tribe.size();
+    for (int i=0; i<size; i++) {
+       if (mutation_rate > rand() % 100) {
+         tribe[i].Mutation(); 
+       }
+    }
+
+}
+
+void Game(vector<Warrior> &tribe) {
+    int size=tribe.size();
+    for (int i=0; i<size; i++) {
+         tribe[i].PutMeInCoach(); 
+    }
+
 }
 
 void TribeReset (vector<Warrior> &tribe) {
@@ -378,7 +455,6 @@ setup();
 
     int i; //for counting dont forget to init
 
-    string tribe_name = "dd";
 
     //Empty Vector
     vector<Warrior> tribe;
@@ -388,7 +464,7 @@ setup();
 
          //pushes new Warrior into the trib, uses Warrior construct to 
          //create random baseline of redcode
-         tribe.push_back(Warrior(tribe_name,i));
+         tribe.push_back(Warrior(population_name,i));
     }
 
     //simple print of current tribe members 
@@ -397,15 +473,25 @@ setup();
     }
 
     cout << "Tribe size " << tribe.size() << endl;
-    //mixMatch(tribe, tribe_name);
-    // printf("Tribe Size = %lu\n", tribe.size());
-    for (i=starting_cycle; i<number_of_cycles; i++) {
-      //mixMatch(tribe, tribe_name);
+
+    for (i=starting_cycle; i<seed_cycles; i++) {
+      TribeReset(tribe);
+      Oblong(tribe);  // test for mutation
       Bartertown(tribe);  // Fitness against each other held in Warrior::Rank
       BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
       RouletSelection(tribe); // call crossover
-      TribeReset(tribe);
     }
+
+
+    for (i=starting_cycle; i<number_of_cycles; i++) {
+      TribeReset(tribe);
+      Oblong(tribe);  // test for mutation
+      Game(tribe);  // Fitness against each other held in Warrior::Rank
+      BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
+      RouletSelection(tribe); // call crossover
+    }
+      Game(tribe);  // Fitness against each other held in Warrior::Rank
+
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 
     for (i=0; i<tribe.size(); i++) {

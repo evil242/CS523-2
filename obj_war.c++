@@ -13,7 +13,7 @@ string Warrior::new_line_of_code(){
                         address_modes[rand()%number_of_address_modes] + " " +
                         to_string(a_random_integer(max_number_size)) + "\n";
 
-        cout << "$$$$$ " << new_line;
+        //cout << "$$$$$ " << new_line;
 
         return new_line;
 
@@ -27,7 +27,6 @@ Modified for Warrior class
 
         fprint();
 
-        FILE * file=0;
 
         char command[256];
         char buffer[256]="";
@@ -36,6 +35,7 @@ Modified for Warrior class
         int count=0;
 
         /*test length*/
+        FILE * file=0;
         if ((file=fopen(fname.c_str(),"r"))==0) exit(0);
 
         strcpy(buffer,";");
@@ -57,26 +57,27 @@ Modified for Warrior class
 
 
         /*test with plant*/
-        sprintf(command,"./pmars -b -o plant.red %s > temp.txt",fname.c_str());
+        sprintf(command,"./pmars -b -o plant.red %s",fname.c_str());
 
-        system(command);
+        //system(command);
+        file = popen(command,"r");
 
-        if ((file=fopen("temp.txt","r"))==0) exit(0);
+        //if ((file=fopen("temp.txt","r"))==0) exit(0);
 
         while (strstr(buffer,fname.c_str())==0)
                 fgets (buffer,255,file);
 
-        fclose(file);
+        pclose(file);
 
         s_ptr=(strstr(buffer,"scores"));
 
         s_ptr+=7;
 
         if (atoi(s_ptr)<1) {
-                printf("===== %s %s",fname.c_str(),s_ptr);
+                //printf("===== %s %s",fname.c_str(),s_ptr);
                 return 0;
         } else {
-                printf("===== %s %s",fname.c_str(),s_ptr);
+                //printf("===== %s %s",fname.c_str(),s_ptr);
                 return 1;
      }
 
@@ -87,7 +88,7 @@ Modified for Warrior class
 //  Takes String n "simple name eg dt, or dd"
 // and serial number sn eg 0-9 for pop of 10
 Warrior::Warrior(string n, int sn)
-: TribeRank(0), serno(sn) {
+: BenchmarkFit(0), TribeRank(0), serno(sn) {
 
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
   tail = "end;";
@@ -112,7 +113,7 @@ Warrior::Warrior(string n, int sn)
 }
 //Warrior constructor for new Warrior child
 Warrior::Warrior(long gen, string n, int sn)
-  : TribeRank(0), serno(sn) {
+  : BenchmarkFit(0), TribeRank(0), serno(sn) {
 
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
   tail = "end;";
@@ -126,7 +127,7 @@ Warrior::Warrior(long gen, string n, int sn)
 }
 
 Warrior::Warrior()
-  : TribeRank(0) {
+  : BenchmarkFit(0), TribeRank(0) {
   body.clear();
   fname = "temp.red";
   header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
@@ -137,6 +138,8 @@ Warrior::Warrior()
 void Warrior::fprint() {
     ofstream fileh(fname.c_str());
     fileh << header;
+    fileh << ";Rank " << TribeRank << endl;
+    fileh << ";BenchmarkFit " << BenchmarkFit << endl;
     fileh << ";name " << fname << endl;
     for(int i=0; i<loc; i++) {
       fileh << body[i];
@@ -274,24 +277,13 @@ void Warrior::PutMeInCoach() {
      bname = WilkiesBenchDir + "/" + WilkiesBench[BMtest]; 
 
 
-      sprintf(command, "./pmars -r %d -b -o %s %s > temp.txt",
+      sprintf(command, "./pmars -r %d -b -o %s %s",
                                 number_of_battles,aname,bname.c_str());
    
-      system(command);
-   
-      if ((file=fopen("temp.txt","r"))==0) exit(0);
-   
-      fgets (buffer,255,file);
-   
-      if (strstr(buffer,aname)==0) {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         b_score=atoi(s_ptr);
-      } else {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         a_score=atoi(s_ptr);
-      }
+      //system(command);
+      file = popen(command,"r");
+ 
+      //if ((file=fopen("temp.txt","r"))==0) exit(0);
    
       fgets (buffer,255,file);
    
@@ -305,9 +297,21 @@ void Warrior::PutMeInCoach() {
          a_score=atoi(s_ptr);
       }
    
-      fclose(file);
+      fgets (buffer,255,file);
    
-      printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
+      if (strstr(buffer,aname)==0) {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         b_score=atoi(s_ptr);
+      } else {
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         a_score=atoi(s_ptr);
+      }
+   
+      pclose(file);
+   
+      //printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
    
       
          if (a_score>=(3*number_of_battles)) BenchmarkFit += 5;

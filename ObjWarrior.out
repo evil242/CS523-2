@@ -1,0 +1,439 @@
+create_new_population=1
+population_size=25
+number_of_cycles=10
+starting_cycle=0
+max_instructions=10
+max_number_size=10
+mutation_rate=5
+insertion_rate=5
+removal_rate=5
+resurrection_rate=2
+number_of_battles=3
+population_name=DD
+path_symbol=/
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_0.red
+spl.i  { 10,# 6
+djn.a  * -6,# -7
+mul.b  { 10,# 10
+sne.b  < -1,$ -5
+div.a  < 0,{ -6
+spl.i  * 10,@ 8
+add.ba > -6,# 10
+mov.x  # 3,# -3
+jmp.f  $ -8,$ -4
+spl.a  # 8,{ -6
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_1.red
+sne.b  < -3,@ 7
+mov.a  $ 8,> 2
+spl.ab < -1,@ 5
+sne.ab * 1,> 2
+djn.b  * 9,$ 3
+slt.ab $ 8,# 4
+sne.ab @ 3,< -4
+jmp.a  > 0,{ -9
+dat.b  @ 0,* 7
+jmn.a  > -5,< -1
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_2.red
+mul.f  # -5,@ 7
+seq.b  < 4,{ -1
+slt.f  { 10,* 10
+mul.b  * 9,$ 3
+add.i  * -8,@ 2
+mul.b  @ -3,< 6
+nop.x  { 0,> 5
+cmp.x  # 2,{ 2
+spl.b  $ -1,< 6
+seq.b  @ 8,< 1
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_3.red
+jmn.ab # -3,> 3
+sne.i  * -1,$ 6
+mod.x  { 3,* 3
+sub.b  > -1,@ -4
+nop.x  > 5,{ -5
+djn.ab * -4,> -3
+dat.b  { -7,< 8
+djn.x  < 0,{ -7
+slt.a  < 1,< 8
+cmp.a  > 5,> -8
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_4.red
+sne.a  @ 10,$ 5
+seq.b  > -9,{ -9
+jmp.ab # 5,* 9
+mod.i  * 3,> 9
+mov.b  > 2,{ 7
+sub.a  > -8,* 7
+dat.i  @ 5,> 8
+add.ba * -5,< -1
+mul.ab * -5,< 1
+jmp.ba @ -8,# -3
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_5.red
+mul.ab @ 1,* -5
+jmz.x  $ -6,< 7
+sne.b  # 9,* 3
+sub.b  < -8,< 4
+jmz.b  > 4,{ 9
+cmp.f  @ -3,@ -8
+seq.f  < -1,< -2
+jmp.a  # 6,{ -8
+jmp.a  @ 4,{ 0
+mov.a  # -8,* 5
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_6.red
+jmn.b  @ 7,$ -8
+jmn.ab $ 0,$ 5
+dat.b  < -1,$ 4
+cmp.a  < -7,< -1
+mod.x  @ 0,{ -9
+mul.i  > -8,> -7
+dat.ab $ -4,@ -1
+spl.b  $ 7,* 2
+div.b  { 5,* 7
+slt.f  $ 1,@ -8
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_7.red
+djn.ba # -8,# 8
+cmp.b  < -1,@ 4
+spl.b  # -6,# -5
+mul.b  * 3,# -4
+add.x  # 2,* 4
+mul.f  > 5,> -3
+sne.b  # -6,> -7
+mov.x  @ 3,# 8
+mod.x  # 8,{ 0
+add.ab $ -3,@ 2
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_8.red
+jmp.b  $ 0,@ -7
+sne.ba { -9,# 4
+jmz.x  * 10,* 7
+sne.x  @ 8,@ -9
+dat.ab # -7,> 9
+spl.a  @ 5,$ 10
+mov.f  < -6,* -9
+mod.x  > 6,# -1
+seq.f  * 1,> -2
+seq.f  { -8,{ 5
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_9.red
+sne.b  * 0,> -7
+add.x  > 8,{ -4
+spl.i  < 5,$ -7
+sub.x  * 1,{ -4
+mod.f  * 4,@ -6
+sub.ab < 9,{ -4
+jmn.ba # 10,# 0
+djn.f  * -5,< 0
+div.ba # -6,# 2
+slt.a  @ 4,> 9
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_10.red
+jmp.x  * 0,> 3
+jmp.b  < 1,{ 1
+cmp.b  < 6,# -6
+jmn.x  * 2,< -1
+add.b  $ 3,# 2
+jmn.ab > -4,{ -7
+dat.a  $ 1,{ -2
+djn.i  $ 2,@ 10
+nop.f  # 4,{ 4
+nop.a  * -4,{ -9
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_11.red
+add.ab # -9,> -2
+djn.f  # 2,# -7
+spl.ba > -5,# 8
+mul.ba < 5,# -8
+sub.b  $ -9,# -1
+add.x  < -1,{ 1
+spl.ba $ 6,* -4
+slt.a  { -6,< -9
+jmp.ab > 5,$ -4
+mov.ab * 3,< -3
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_12.red
+jmn.f  # -6,$ 9
+mov.x  # -1,{ -4
+djn.i  $ -3,{ -6
+mul.b  @ -7,# 7
+mul.ab * 5,# -4
+spl.f  $ 4,{ 0
+mov.b  * 2,# -2
+mul.i  @ 10,* -1
+mod.x  # -1,< 7
+jmp.x  { -6,# 2
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_13.red
+sub.x  # 4,# -6
+sne.ab { 3,@ 7
+spl.b  # 8,{ 7
+jmn.ab # -9,< 2
+mul.b  * 10,$ -7
+cmp.ab $ 7,@ 3
+dat.ab * -9,@ 4
+nop.a  > -1,# -7
+jmp.b  # -1,< -8
+djn.ba > -4,* -5
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_14.red
+seq.a  * -1,* 6
+spl.ba # -7,@ -8
+mov.x  $ -1,# -2
+djn.i  < -5,@ -4
+mul.b  @ -3,< 8
+jmn.f  * -9,{ 9
+sne.ba @ -4,@ 3
+div.i  # 6,* -3
+jmz.a  $ -7,> 0
+mod.ba $ 4,$ -1
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_15.red
+spl.x  # 10,{ 10
+mod.ab @ -8,$ 5
+sne.i  @ 3,> -5
+mod.ba < -1,> 0
+djn.ba $ 8,$ -7
+add.b  { -4,# -3
+mul.a  @ 0,# 2
+spl.ab > -5,# 7
+cmp.a  < -4,> -8
+add.x  # 7,< -5
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_16.red
+jmn.ba < -9,@ -1
+mov.ba $ 3,* 0
+spl.i  # -6,$ -1
+add.f  > -9,# 6
+mov.ba > 10,$ 4
+nop.x  $ 9,@ -6
+nop.b  @ 3,# -1
+cmp.a  > -9,# -7
+nop.x  $ -9,$ -6
+seq.ab > -7,* 10
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_17.red
+djn.f  { 10,# 0
+jmn.x  * 6,{ 10
+dat.ab < -7,> 4
+slt.a  < -3,# -4
+sne.ba $ -3,{ 2
+spl.x  @ 2,$ -6
+dat.ab { 5,{ 0
+slt.ba # -5,# 1
+sub.i  * 4,@ -6
+jmn.f  @ 0,* -2
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_18.red
+mov.x  # -3,* 6
+spl.ab $ 0,@ 4
+mul.b  $ 3,# -6
+cmp.b  $ -8,< 9
+sne.a  > 6,{ 1
+mul.ba # 8,< -4
+mod.ab @ 0,< 7
+slt.ba { 2,> 1
+mod.a  $ 3,{ 2
+slt.f  { -6,# -6
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_19.red
+nop.b  < 8,> -9
+nop.f  * 7,$ -5
+spl.x  # -7,* 0
+dat.b  > 7,> 8
+sne.b  < -6,* -3
+sne.a  # 10,{ -9
+mov.ab > 9,{ 0
+cmp.ba # 2,< 3
+jmz.f  * 4,# -2
+jmp.i  # 3,* -3
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_20.red
+spl.ab # 8,{ 4
+mul.ba > 1,> -9
+dat.f  $ -3,* 2
+spl.a  @ -5,> -2
+slt.b  < 3,$ 4
+mul.ba > -2,@ -9
+div.b  { -3,> 0
+sne.b  * -1,$ 6
+seq.ba > 7,$ 1
+nop.f  { -9,< -3
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_21.red
+seq.f  $ -3,$ -5
+sub.ba $ -5,< 5
+jmp.x  # 0,< -3
+jmz.b  # -8,@ -5
+mov.i  # 2,# -3
+mod.ba { -3,< -5
+jmp.ba $ 10,@ 8
+cmp.i  @ 6,{ -9
+jmn.b  > 3,< -5
+jmz.a  < -1,@ 8
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_22.red
+jmz.x  { -7,$ 8
+jmp.a  # 7,{ -7
+djn.ab @ -2,# -9
+jmz.a  * -9,> 7
+mul.b  # -2,* 4
+mov.x  # 6,{ 4
+jmz.ba @ -4,@ -2
+dat.f  $ -4,@ 4
+djn.i  @ 1,$ -6
+mul.ab > -1,> 4
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_23.red
+sne.f  { 6,@ -7
+dat.ab > 7,{ -9
+jmp.x  < 8,$ -7
+jmz.a  { 1,$ 6
+add.ab { 7,{ -8
+sne.b  > -2,@ 1
+spl.x  { -3,$ 6
+cmp.b  $ 0,* 9
+spl.f  # 2,# -7
+jmp.i  { -6,$ 7
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 0
+;name DD_24.red
+slt.f  $ -5,@ -9
+jmz.x  { -5,$ 6
+nop.ab < -1,$ -4
+spl.b  # -1,$ 7
+spl.ab $ 4,< -4
+jmn.f  * -5,> -9
+mov.a  * 2,< -6
+mul.x  { -1,> 3
+jmz.ab { -6,@ -4
+sne.i  * 5,* -6
+end;
+Tribe size 25

@@ -15,175 +15,8 @@ int a_random_number(int range) {
         return (int)rand()%range;
 }
 
-void setup(void){
-
-   FILE * config_file=0;
-   time_t t;
-   int index;
-    char buffer[256];
-   char * parm_ptr=0;
-
-   /*seed the random numbers*/
-   srand((unsigned int) time(& t));
-
-   /*set defaults*/
-   CrossType = ONEPTCROSS; // (ONEPTCROSS,UNIFORMCROSS,NOCROSS)
-   create_new_population=1;
-   population_size=25;
-   number_of_cycles=250;
-   starting_cycle=0;
-   max_instructions=10;
-   max_number_size=10;
-   mutation_rate=25;
-   insertion_rate=5;
-   removal_rate=5;
-   resurrection_rate=2;
-   number_of_battles=3;
-   seed_cycles=10;
-
-   strcpy(population_name,"ga");
-   strcpy(path_symbol,"/");
-
-   /*read config file if there*/
-   if (0==(config_file=fopen("ga_war.cfg","r"))){
-      printf("ga_war.cfg not found using defaults.\n");
-   }else {
-      while (fgets(buffer,255,config_file)!=0) {
-
-         /*ignore this line*/
-         if(strstr(buffer,";")!=0) continue;
-
-         if(strstr(buffer,"CrossType")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               create_new_population=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"create_new_population")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               create_new_population=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"population_size")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               population_size=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"starting_cycle")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               starting_cycle=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"number_of_cycles")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               number_of_cycles=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"seed_cycles")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               number_of_cycles=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"max_instructions")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               max_instructions=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"max_number_size")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               max_number_size=atoi(++parm_ptr);
-            continue;
-         }
-
-
-         if(strstr(buffer,"mutation_rate")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               mutation_rate=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"insertion_rate")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               insertion_rate=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"removal_rate")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               removal_rate=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"resurrection_rate")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               resurrection_rate=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"number_of_battles")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               number_of_battles=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"population_name")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               strncpy(population_name,++parm_ptr,2);
-            continue;
-         }
-
-         if(strstr(buffer,"path_symbol")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               strncpy(path_symbol,++parm_ptr,1);
-            continue;
-         }
-
-
-      }/*while*/
-
-      fclose(config_file);
-   }
-
-   /*print the values*/
-   printf("create_new_population=%d\n",create_new_population);
-   printf("population_size=%d\n",population_size);
-   printf("number_of_cycles=%d\n",number_of_cycles);
-   printf("starting_cycle=%d\n",starting_cycle);
-   printf("max_instructions=%d\n",max_instructions);
-   printf("max_number_size=%d\n",max_number_size);
-   printf("mutation_rate=%d\n",mutation_rate);
-   printf("insertion_rate=%d\n",insertion_rate);
-   printf("removal_rate=%d\n",removal_rate);
-   printf("resurrection_rate=%d\n",resurrection_rate);
-   printf("number_of_battles=%d\n",number_of_battles);
-   printf("population_name=%s\n",population_name);
-   printf("path_symbol=%s\n",path_symbol);
-
-}
 
 int Thunderdome(Warrior A, Warrior B){
-   FILE * file=0;
 
    char command[256];
    char buffer[256]="";
@@ -196,12 +29,26 @@ int Thunderdome(Warrior A, Warrior B){
    const char *bname = B.SMNB();
 
 
-   sprintf(command, "./pmars -r %d -b -o %s %s > temp.txt",
+   sprintf(command, "./pmars -r %d -b -o %s %s",
             number_of_battles,aname,bname);
 
-   system(command);
+   //FILE * file=0;
+   //system(command);
+   //if ((file=fopen("temp.txt","r"))==0) exit(0);
 
-   if ((file=fopen("temp.txt","r"))==0) exit(0);
+   FILE *file = popen(command,"r");
+
+   fgets(buffer,255,file);
+
+   if (strstr(buffer,aname)==0) {
+      s_ptr=(strstr(buffer,"scores"));
+      s_ptr+=7;
+      b_score=atoi(s_ptr);
+   } else {
+      s_ptr=(strstr(buffer,"scores"));
+      s_ptr+=7;
+      a_score=atoi(s_ptr);
+   }
 
    fgets (buffer,255,file);
 
@@ -215,21 +62,9 @@ int Thunderdome(Warrior A, Warrior B){
       a_score=atoi(s_ptr);
    }
 
-   fgets (buffer,255,file);
+   pclose(file);
 
-   if (strstr(buffer,aname)==0) {
-      s_ptr=(strstr(buffer,"scores"));
-      s_ptr+=7;
-      b_score=atoi(s_ptr);
-   } else {
-      s_ptr=(strstr(buffer,"scores"));
-      s_ptr+=7;
-      a_score=atoi(s_ptr);
-   }
-
-   fclose(file);
-
-   printf("^^^^^%9s %9s:%d %d\n",aname,bname,a_score,b_score);
+   //printf("^^^^^%9s %9s:%d %d\n",aname,bname,a_score,b_score);
 
    if (a_score>=(3*number_of_battles)) return TOTAL_WIN;
    if (b_score>=(3*number_of_battles)) return TOTAL_LOSS;
@@ -362,18 +197,26 @@ int TournSelection (vector<Warrior> &tribe) {
   long prob_i;
 
   Warrior BPair[2];
-  BPair[0] = tribe[count];
-  BPair[1] = tribe[count-1];
 
-  //Calc Sum(Fit_i)
-  for (i=0; i<count; i++ ) { 
+  //TSprob = .75 from Config.h
+  do { 
+    sumfit=0;
+    BPC=0;
+    for (i=0; i<size; i++ ) { 
+        int currTM = count - i;
+        prob_i = 1/rand();
+        if (TSprob * ((1 - TSprob)^i) > prob_i) {
+           BPair[BPC] = tribe[currTM];
+           BPC++;
+        }
+
+       //Calc Sum(Fit_i)
        sumfit += tribe[i].TwoFit();
-  }
+    }// end for size
+  } while (BPC > 1); // make sure we got two breeding pair
 
-  //Select by Roulet chance for breed Out lower half of pop (sorted by MergeSort)
-        for(i=0; i<midpoint; i+=2){
-          prob_i = 1/rand();
-          if((tribe[i].TwoFit() / sumfit) < prob_i ) {
+  //Select by chance for breed Out lower half of pop (sorted by MergeSort)
+  for(i=0; i<midpoint; i+=2){
             switch (CrossType) {
                case ONEPTCROSS :
                   tribe[i] = BPair[0] + BPair[1];
@@ -384,8 +227,6 @@ int TournSelection (vector<Warrior> &tribe) {
                default : //same as NOCROSS
                   break;
             }
-          }
-          if((tribe[i+1].TwoFit() / sumfit) < prob_i ) {
             switch (CrossType) {
               case ONEPTCROSS :
                   tribe[i+1] = BPair[1] + BPair[0];
@@ -397,8 +238,8 @@ int TournSelection (vector<Warrior> &tribe) {
                   break;
           
             }
-          }
-        }
+  }
+
   return sumfit;
 }//end TournSelection
 
@@ -446,14 +287,26 @@ void TribeReset (vector<Warrior> &tribe) {
 
 }
 
+
+void TribeBMFReset (vector<Warrior> &tribe) {
+    int size=tribe.size();
+    for (int i=0; i<size; i++) {
+       tribe[i].ResetBMF(); 
+    }
+
+}
+
 int main () {
 
 setup();
 
+    ofstream logfile("./GA_War_Sumfit.log");
 
    srand(time(NULL));
 
     int i; //for counting dont forget to init
+
+    int sumfit; //for getting return of tribe fitness
 
 
     //Empty Vector
@@ -484,12 +337,19 @@ setup();
 
 
     for (i=starting_cycle; i<number_of_cycles; i++) {
-      TribeReset(tribe);
-      Oblong(tribe);  // test for mutation
-      Game(tribe);  // Fitness against each other held in Warrior::Rank
-      BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
-      RouletSelection(tribe); // call crossover
+       do {
+         TribeReset(tribe);
+         Oblong(tribe);  // test for mutation
+         Game(tribe);  // Fitness against each other held in Warrior::Rank
+         BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
+         sumfit = RouletSelection(tribe); // call crossover
+         logfile << sumfit << endl;
+       } while (sumfit < (5 * NumOWilkies));  // stop criteria 
     }
+      // sumfit is the sumation of the fitness for the whole tribe
+      // If 5 out of 25 warriors had winning score of 5, sumfit = 25
+
+
       Game(tribe);  // Fitness against each other held in Warrior::Rank
 
     //printf("Tribe Size = %lu\n", tribe.size());

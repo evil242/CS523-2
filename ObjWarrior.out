@@ -4,7 +4,7 @@ number_of_cycles=10
 starting_cycle=0
 max_instructions=10
 max_number_size=10
-mutation_rate=5
+mutation_rate=15
 insertion_rate=5
 removal_rate=5
 resurrection_rate=2
@@ -19,16 +19,16 @@ SelectType=0
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_0.red
-mul.x  < -3,# 7
-cmp.f  > 7,# 2
-mov.i  { 6,$ -4
-div.a  < 3,{ -1
-jmp.f  # -6,{ 0
-jmp.i  * 8,< 5
-dat.f  # 0,@ 0
-jmp.ab # -2,< 6
-dat.b  * -1,# -7
-mod.ba { -5,< 7
+seq.a  > 4,{ -3
+jmp.i  # 2,* -3
+jmp.b  * -9,{ 3
+jmn.a  < 4,@ -8
+slt.x  $ -5,> 3
+seq.a  < -8,< -4
+slt.ab * -8,$ 5
+add.b  $ -8,< 8
+dat.ab * 4,{ 7
+seq.a  # -8,# -3
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -36,16 +36,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_1.red
-mul.f  # -1,< 8
-mul.ab * -7,# -1
-mul.ab { -5,# -2
-sub.a  { 5,@ 3
-mod.b  * 1,> 1
-spl.b  # 2,< -4
-sub.b  * 1,< -6
-add.x  < -2,* 3
-cmp.i  < -8,@ -3
-dat.f  * 8,$ 10
+mul.b  $ 1,< 1
+jmp.ba * 0,@ 9
+mul.ba < -7,@ 9
+djn.ba $ -9,$ -5
+add.b  * -9,@ 1
+jmz.x  @ -1,> -8
+djn.a  $ -5,> 10
+add.f  # 7,$ 9
+mul.b  # 6,@ -5
+mod.f  # 1,{ -2
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -53,16 +53,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_2.red
-mul.i  # 2,$ -2
-seq.ab # -3,{ -6
-sne.i  { 9,< 1
-seq.b  < -7,* 3
-add.x  $ -4,# 7
-spl.ab $ -4,$ -9
-div.x  * -6,* 6
-mod.i  @ -8,{ 6
-mod.ab $ -2,$ -6
-mov.i  > -5,# -3
+nop.x  * -4,* 4
+mov.b  > -9,# -6
+add.f  @ -6,$ 2
+spl.i  > 0,$ -2
+sne.ab @ 6,@ -6
+seq.ab $ -1,> 4
+jmp.a  * 0,* 3
+jmn.b  < -7,{ 8
+mod.ba < -6,{ 2
+cmp.x  > 4,< -8
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -70,16 +70,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_3.red
-spl.i  @ 4,{ 5
-jmp.i  { -7,# -5
-seq.i  @ -9,* 2
-djn.x  $ 2,# -5
-nop.f  < 8,{ -4
-djn.f  * -2,@ -9
-mov.x  { -3,{ -4
-mul.f  # 5,> 4
-cmp.ba @ 9,@ 3
-dat.x  > -7,@ -9
+djn.i  # 4,# -4
+cmp.ab * -1,< -6
+seq.f  * -1,> 3
+div.a  { 1,@ -5
+sne.f  @ -6,< 9
+mov.ab # -7,@ 3
+sub.ba { 9,# -6
+mod.ab $ 0,{ -3
+div.x  > -8,$ -9
+dat.x  > -8,* -9
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -87,16 +87,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_4.red
-spl.b  # 5,# 2
-seq.i  @ 4,@ 7
-nop.b  $ 2,{ -5
-div.ba < 10,< 9
-jmn.i  * 4,# 5
-sne.ab { -7,@ -1
-seq.ab { 5,@ -9
-djn.b  > -8,@ 2
-mul.ab < 3,* 0
-jmz.i  { -9,< 1
+jmp.x  # -2,@ 4
+nop.i  { -6,# -4
+add.f  { 2,@ 8
+mul.x  $ -2,{ 9
+mul.a  * 10,* 5
+sne.x  $ -8,# -1
+sub.x  < 8,{ 8
+div.i  { 4,@ 6
+mov.ba > 9,> 4
+jmz.a  < -7,> -4
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -104,16 +104,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_5.red
-sne.b  $ -3,@ -1
-spl.b  # 3,{ -1
-jmn.f  < -4,> -3
-sub.ab * 1,< -5
-mov.x  # -9,> -4
-nop.b  { 8,# -1
-slt.x  @ -6,# 5
-seq.a  $ 8,> -7
-jmp.b  @ 2,* 4
-mod.ab < -5,@ -3
+sub.i  { 8,@ 5
+add.i  $ -6,< 3
+add.ab # -5,{ -7
+mov.a  $ -7,> 1
+add.b  # 8,@ 6
+jmp.i  # -1,@ -4
+nop.i  $ -4,> -3
+sne.i  @ 4,$ -8
+jmz.b  $ 5,$ -2
+div.ab < 4,$ -2
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -121,16 +121,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_6.red
-sne.a  # 4,{ 4
-jmp.x  # 4,# -4
-add.i  > 0,< 6
-sne.ab # -3,< -6
-add.i  { -9,{ -9
-spl.a  # -2,@ 5
-div.ab * 1,> -7
-jmz.f  > -2,{ -8
-cmp.x  > 0,* 1
-add.a  < -8,# 7
+djn.b  < 7,> -5
+djn.a  { 3,* -3
+jmz.x  { -8,< 5
+mul.b  * -1,$ 6
+mod.f  @ 0,< 8
+jmp.i  # 9,< -6
+add.b  * 8,@ 10
+jmz.i  { -2,@ 2
+spl.ab < -6,> 1
+div.x  > 2,> -9
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -138,16 +138,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_7.red
-nop.ba { 1,* -7
-mul.a  # -8,$ -2
-sne.a  < 5,# -9
-spl.a  { 8,* 10
-jmz.f  # 10,* 5
-mul.ab { 8,* -6
-jmz.ab $ -7,@ 3
-mul.f  # -4,@ -9
-sne.ab { -7,< -7
-mod.x  # 8,> -1
+jmn.i  $ 3,* 1
+nop.a  < 1,$ -7
+dat.f  > -9,{ 2
+mod.ab $ -3,< -2
+sub.a  # 4,< 10
+jmz.b  * -2,# -1
+jmp.b  # 8,# 10
+mov.a  { -9,@ 6
+seq.ba @ -7,@ -1
+seq.b  > 7,$ -2
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -155,16 +155,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_8.red
-seq.i  $ -7,@ -1
-mov.ba $ 6,> -6
-jmp.ba # 2,< 7
-jmn.b  # 0,@ -3
-jmp.a  { 10,@ 4
-slt.b  { -6,@ 8
-djn.ba @ -5,> 1
-cmp.x  * -1,> 8
-jmn.b  # -5,< 9
-cmp.x  * -2,$ 3
+seq.f  @ -2,# 1
+sub.ab < 5,$ 10
+jmn.f  # -9,# -9
+slt.b  < -7,# 9
+jmp.a  $ -4,< 10
+cmp.a  < 4,* -8
+spl.ab > 4,* -7
+sne.x  * -1,# -6
+djn.x  @ -1,$ 8
+jmz.f  * -9,@ 1
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -172,16 +172,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_9.red
-djn.b  # 3,> -4
-add.a  $ 3,# 0
-add.b  @ 1,< 9
-div.ba > 4,* 0
-nop.ba > -5,# 4
-dat.x  # 3,> -8
-sne.a  > 9,# 8
-add.a  $ 0,* 2
-sub.ab @ 1,* 0
-add.i  > 10,> 1
+jmz.ab # 0,$ -8
+sub.f  { 3,# -9
+nop.x  # 6,* -7
+djn.ab < -5,{ -8
+jmn.i  { 5,> 8
+mul.ab $ 5,< 4
+cmp.ba > -7,> -3
+jmp.x  > -9,> -9
+sub.b  $ -5,* -2
+cmp.a  { 9,$ 4
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -189,16 +189,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_10.red
-spl.ab # -5,{ -9
-cmp.ab * 0,@ 10
-sne.i  * -5,{ 3
-div.a  < 8,$ -9
-sub.i  * -4,$ -6
-add.x  # -5,{ 3
-djn.x  * 3,# 7
-mov.ab > 1,{ -3
-jmz.ab < -3,{ 4
-mul.x  @ 6,$ -7
+add.f  @ -9,{ -6
+jmn.x  { 4,$ -3
+nop.b  $ -3,> 8
+spl.ab * -5,< -2
+seq.x  { -7,< -7
+sub.b  # 6,{ 5
+jmp.x  # -3,# 6
+div.b  * -4,# -8
+dat.a  # 4,@ -1
+seq.ba { -8,{ -7
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -206,16 +206,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_11.red
-djn.ba # 2,# -7
-nop.ba > 2,{ 8
-djn.ba < 3,< 2
-spl.x  # 8,# -6
-cmp.x  # -6,@ 1
-mod.ba * 4,> -1
-mul.a  # 0,* -5
-sub.f  * 5,$ 4
-cmp.i  { 7,* 2
-jmp.f  { -8,{ -6
+jmp.b  # 2,< -7
+sub.i  * -4,$ 0
+spl.x  # 10,$ -6
+mov.ab < 2,{ -6
+cmp.x  @ 7,< 8
+sne.ab < -8,> -9
+sub.f  > 8,{ 7
+cmp.a  * 1,@ 8
+mod.b  < 1,{ 1
+jmn.a  @ 6,{ -8
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -223,16 +223,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_12.red
-spl.i  # -5,> -2
-mov.ba * -5,@ 8
-div.ba @ 3,$ -3
-jmn.ba # 6,@ 6
-mod.i  { -3,> -4
-djn.i  > 8,$ -8
-mul.i  # 1,$ 6
-jmp.ba # 10,$ -1
-sne.b  * 0,$ 1
-jmp.ab # -3,< 6
+slt.b  @ 8,# 6
+sub.a  * 7,@ -2
+add.ba $ 10,* -9
+jmp.f  # 3,$ 8
+mod.ab { 1,{ 7
+cmp.ba < 3,< -7
+mul.i  < -4,< 0
+mov.ba $ 2,> 9
+mod.ba * -1,< -8
+jmp.i  * -2,# -6
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -240,16 +240,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_13.red
-seq.f  $ 10,> 5
-spl.ab > -5,$ -9
-spl.i  # 8,# 5
-mod.ba > -9,< 0
-spl.b  @ 10,$ 5
-sne.a  $ 2,{ 10
-mod.b  # 9,> 5
-seq.ba > 3,> -3
-jmz.x  < 10,$ -4
-add.ab # 10,{ 8
+mul.b  < 6,* -8
+cmp.b  > -6,$ -8
+sub.a  > -6,# 7
+mul.i  # -5,@ -3
+cmp.x  $ 8,* 0
+nop.a  * 5,* -7
+nop.x  $ 3,$ -4
+spl.i  # 6,> -6
+nop.a  # -1,# -9
+slt.b  * 5,# 0
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -257,16 +257,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_14.red
-jmn.x  { 4,> 1
-jmp.a  * 0,* -6
-sne.i  $ 9,@ -9
-seq.ba { -1,$ -1
-jmp.b  $ -2,@ -5
-mod.ba @ 10,< 2
-mod.ba > -2,* 0
-mov.i  # 4,* 1
-sub.f  > 3,# 9
-jmp.a  @ -2,{ 2
+jmp.b  # 9,@ 6
+dat.f  * 0,< 1
+jmz.x  $ 1,< 0
+djn.x  > -7,{ 5
+djn.f  # -1,> 6
+cmp.b  $ 7,# -5
+jmz.f  { 1,# -1
+div.a  { 8,{ 1
+sub.ba < 5,$ 3
+mod.ab @ -5,> 4
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -274,16 +274,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_15.red
-nop.f  * -5,> -8
-spl.a  < -3,* 3
-sub.i  * -7,* -6
-sub.x  > 1,$ 0
-spl.f  # -4,@ -2
-jmn.ab { 4,{ 1
-mul.b  { -3,# -3
-dat.ba # 5,# 2
-dat.f  { -6,@ -4
-jmn.ba $ 5,* -8
+jmp.ab # 9,$ -4
+jmp.f  * -6,> -8
+jmz.i  @ -9,@ -4
+slt.x  @ 8,> 8
+mod.f  * 8,$ -5
+add.i  < -7,{ -7
+djn.ab > -7,< -2
+sne.i  > 10,> 6
+add.ba $ 6,$ 8
+spl.f  $ -3,$ -7
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -291,16 +291,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_16.red
-spl.f  # 7,< 3
-seq.a  * -2,{ -8
-djn.ba > 10,* 7
-cmp.f  > -5,{ 6
-jmz.ba * 6,< 10
-mul.ab < -5,$ -1
-add.ab * 1,< -5
-mod.b  < -8,> 1
-jmp.a  > -2,* -5
-dat.ba < -7,# -4
+jmn.x  $ 1,> 3
+jmp.ba # -4,{ 9
+spl.i  $ -2,# 2
+seq.f  { -7,{ -4
+div.a  # -7,# 10
+djn.i  # 10,# -5
+djn.b  * 0,$ 4
+sub.f  @ -2,* 2
+dat.x  * 10,$ 8
+mov.ab < 9,@ -9
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -308,16 +308,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_17.red
-sub.b  { 8,* 2
-nop.i  * 9,# 8
-mod.ba @ 2,@ 1
-mul.a  $ -1,# -3
-spl.ba # 8,> -2
-djn.i  * -4,# 8
-djn.f  < -6,{ 8
-slt.f  @ 6,@ 1
-sub.ab { -8,$ -1
-nop.f  * 3,> -8
+spl.x  # 4,$ 2
+mov.b  $ -4,{ -7
+cmp.b  * 3,$ 5
+sub.i  * 10,* -6
+seq.b  * -9,{ -6
+mul.i  # 4,# -3
+cmp.i  > 0,> 5
+cmp.x  > 2,# -4
+dat.ab { -1,> -8
+djn.ba @ 0,# 1
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -325,16 +325,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_18.red
-slt.b  < -2,< -2
-sub.b  # -5,* -9
-sub.b  < -2,* -3
-jmn.b  < -5,@ 7
-mov.b  > -6,* -7
-jmp.ba # 1,{ -3
-jmz.f  # -4,> -8
-dat.b  $ 8,* 10
-dat.f  * 9,# 9
-nop.a  @ 0,< 8
+jmp.ba @ 5,$ -7
+cmp.f  { -3,> 4
+nop.x  < -1,{ -5
+jmp.f  # 8,@ 9
+djn.f  # 6,$ -2
+dat.f  > 0,< -2
+div.b  > -8,> -6
+nop.i  { 2,< 8
+add.i  { -6,$ 6
+jmp.a  @ 0,@ -7
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -342,16 +342,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_19.red
-cmp.x  < -6,# 0
-spl.x  { 7,{ -7
-spl.x  # 6,# -7
-sne.ba $ 2,# 0
-nop.f  * -6,> 2
-jmn.ba # 2,@ 6
-dat.x  > 8,{ 0
-mov.a  * -8,@ -8
-spl.x  @ 10,* 10
-jmn.i  @ -8,< 3
+nop.a  @ 9,> 7
+cmp.b  * -6,< -5
+cmp.a  > -9,< 0
+jmz.f  # -4,@ 8
+cmp.i  @ 7,$ -7
+mod.ba $ 5,@ -7
+mod.f  # -8,* -8
+spl.ab > 0,{ 5
+jmz.x  $ -1,# -7
+nop.i  < 9,{ 5
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -359,16 +359,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_20.red
-mov.ab * 9,< 4
-nop.f  { -7,@ 2
-sne.i  # 6,@ 0
-jmp.a  # -2,{ -6
-nop.x  # 0,{ -7
-djn.i  * 6,$ 2
-spl.f  { -6,# 0
-add.a  < 8,# 10
-mod.a  { 8,@ -9
-spl.b  { 10,$ 2
+spl.ab # -6,@ -5
+sne.i  # 8,# -8
+sub.x  < 0,< 4
+mov.a  * 7,@ 4
+slt.a  # -6,@ -1
+mul.f  > -6,> 0
+slt.ba @ 8,< 4
+add.b  # -2,{ 5
+nop.ba > -4,{ -6
+spl.i  # 1,* -8
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -376,16 +376,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_21.red
-spl.a  # -8,@ -6
-jmn.ab * -8,< -8
-mul.b  { -4,< -7
-dat.b  * -1,$ 2
-sne.i  # 4,< 4
-jmn.b  @ -6,< -3
-nop.i  > -5,$ 4
-djn.ab $ 2,< -6
-jmn.f  * 4,{ 9
-djn.b  $ 3,$ -1
+spl.f  # 6,# -6
+seq.a  > 10,$ -7
+dat.b  * 2,* 8
+spl.ba > 0,@ -9
+nop.i  * 9,# 8
+div.i  > -3,* -2
+dat.b  # 9,> 0
+nop.ba < 3,{ 9
+cmp.a  > 4,* -9
+add.ba > 7,* 6
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -393,16 +393,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_22.red
-seq.x  { 3,{ -4
-jmp.f  $ 0,< 3
-jmz.i  > -4,* 0
-nop.i  # 3,* 10
-jmp.a  > 7,* -8
-mul.x  > 2,$ -1
-seq.x  @ 1,* 4
-mod.f  # 2,$ -8
-spl.a  $ -6,# -3
-div.a  { 7,< 6
+spl.x  # -1,> -2
+jmz.ba < -8,@ 5
+spl.f  $ -6,> 8
+djn.f  $ 3,> 2
+sub.x  # 0,$ 6
+mod.f  # -2,> -4
+jmp.b  < -7,# -3
+add.ab > 3,$ 0
+jmz.f  * 0,@ -7
+jmz.b  < 3,< -1
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -410,16 +410,16 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_23.red
-jmz.f  # -8,@ 4
-slt.ba * -7,* 2
-jmp.a  > 0,* 0
-jmz.x  * -4,< -1
-dat.f  # -8,< 7
-mod.i  * -2,$ -5
-nop.ab > 3,{ 2
-jmz.i  < -5,< 3
-slt.x  # -1,@ -3
-mod.a  # -2,# 2
+sub.ab > 3,@ 2
+jmz.x  $ 0,< 2
+jmz.a  @ 2,< 3
+nop.b  > -3,* 3
+jmp.a  < -1,{ -8
+mul.ba $ 4,$ -5
+sub.x  * -4,> -5
+nop.ab # 10,@ -2
+jmz.ab { 7,# 4
+spl.ba # 3,@ -5
 end;
 ;redcode-94
 ;assert CORESIZE == 8000
@@ -427,15 +427,15 @@ end;
 ;Rank 0
 ;BenchmarkFit 0
 ;name DD_24.red
-add.f  # -8,> 10
-djn.a  # 9,< 7
-seq.i  > 10,< -5
-sub.ba @ 7,< -3
-jmn.ab { 9,$ 7
-djn.x  # -4,* -4
-slt.ab $ -8,$ 5
-mod.ba > 1,{ 10
-mov.ab < -2,# 9
-djn.b  @ 5,@ -6
+slt.f  * 7,> -1
+jmp.ba # -9,# 4
+cmp.i  * 8,> 8
+div.f  > 4,@ -8
+slt.f  $ 2,@ 7
+djn.i  * 8,< -6
+slt.x  $ 1,{ 4
+sne.x  # 6,# 6
+spl.x  { 5,$ -7
+spl.f  @ -8,* 9
 end;
 Tribe size 25

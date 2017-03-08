@@ -332,7 +332,16 @@ setup();
       Oblong(tribe);  // test for mutation
       Bartertown(tribe);  // Fitness against each other held in Warrior::Rank
       BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
-      RouletSelection(tribe); // call crossover
+         switch (SelecType) {
+               case ROULETTE :
+                  sumfit = RouletSelection(tribe); // call crossover
+                  break;
+               case TOURNAMENT :
+                  sumfit = TournSelection(tribe); // call crossover
+                  break;
+               default : //same as NOCROSS
+                  break;
+            }
     }
 
 
@@ -343,7 +352,7 @@ setup();
          Game(tribe);  // Fitness against each other held in Warrior::Rank
          BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 
-         switch (CrossType) {
+         switch (SelecType) {
                case ROULETTE :
                   sumfit = RouletSelection(tribe); // call crossover
                   break;

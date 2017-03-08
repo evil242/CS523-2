@@ -220,6 +220,6 @@ void setup(void){
    printf("population_name=%s\n",population_name);
    printf("path_symbol=%s\n",path_symbol);
    printf("CrossType=%d\n",CrossType);
-   printf("SelectType=%d\n",SelecType);
+   printf("SelecType=%d\n",SelecType);
 
 }

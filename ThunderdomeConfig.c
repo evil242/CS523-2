@@ -7,6 +7,15 @@
 #define LOSS   -1
 #define TIE     0
 
+#define NOCROSS 0
+#define ONEPTCROSS 1
+#define UNIFORMCROSS 2
+
+#define ROULETTE 0
+#define TOURNAMENT 1
+#define RANDOMSEL 2
+
+
 /************************************/
 /*these are set from the config file*/
 
@@ -32,6 +41,9 @@
 
  int max_number_size=10;
  int max_instructions=10;
+
+ int CrossType = ONEPTCROSS; 
+ int SelecType = ROULETTE;
 
 
 /************************************/
@@ -73,6 +85,13 @@ void setup(void){
 
          /*ignore this line*/
          if(strstr(buffer,";")!=0) continue;
+
+         if(strstr(buffer,"SelecType")!=0) {
+            parm_ptr=strstr(buffer,"=");
+            if (parm_ptr!=0)
+               create_new_population=atoi(++parm_ptr);
+            continue;
+         }
 
          if(strstr(buffer,"CrossType")!=0) {
             parm_ptr=strstr(buffer,"=");
@@ -200,5 +219,7 @@ void setup(void){
    printf("number_of_battles=%d\n",number_of_battles);
    printf("population_name=%s\n",population_name);
    printf("path_symbol=%s\n",path_symbol);
+   printf("CrossType=%d\n",CrossType);
+   printf("SelectType=%d\n",SelecType);
 
 }

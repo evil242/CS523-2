@@ -342,7 +342,18 @@ setup();
          Oblong(tribe);  // test for mutation
          Game(tribe);  // Fitness against each other held in Warrior::Rank
          BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
-         sumfit = RouletSelection(tribe); // call crossover
+
+         switch (CrossType) {
+               case ROULETTE :
+                  sumfit = RouletSelection(tribe); // call crossover
+                  break;
+               case TOURNAMENT :
+                  sumfit = TournSelection(tribe); // call crossover
+                  break;
+               default : //same as NOCROSS
+                  break;
+            }
+
          logfile << sumfit << endl;
        } while (sumfit < (5 * NumOWilkies));  // stop criteria 
     }

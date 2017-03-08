@@ -22,7 +22,9 @@ using namespace std;
 #define ONEPTCROSS 1
 #define UNIFORMCROSS 2
 
-static int CrossType=0; //NOCROSS
+#define ROULETTE 0
+#define TOURNAMENT 1
+#define RANDOMSEL 2
 
 static unsigned long NumOWilkies=12;
 
@@ -80,6 +82,9 @@ extern int removal_rate;
 
 extern int max_number_size;
 extern int max_instructions;
+
+extern int CrossType;
+extern int SelecType;
 
 /********************/
 int a_random_integer(int);

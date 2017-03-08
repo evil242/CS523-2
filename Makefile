@@ -3,7 +3,7 @@
 
 TARGET = ga_war
 CC = g++
-CFLAGS = -fpermissive -std=c++11 
+CFLAGS = -std=c++11 #-fpermissive 
 
 HEADERS = obj_war.h Sorting.h ThunderdomeConfig.h
 CFILES = obj_war.c++ Sorting.c ThunderdomeMain.c++ ThunderdomeConfig.c

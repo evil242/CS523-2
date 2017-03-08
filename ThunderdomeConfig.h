@@ -58,28 +58,28 @@ static string address_modes[]=
 /************************************/
 /*these are set from the config file*/
 
-static char path_symbol[32]="/";
+extern char path_symbol[32];
 
-static int create_new_population=1;
-static char population_name[32]="DD";
-static int population_size=25;
+extern int create_new_population;
+extern char population_name[32];
+extern int population_size;
 
-static int starting_cycle=0;
-static int number_of_cycles=25;
-static int seed_cycles=10;
+extern int starting_cycle;
+extern int number_of_cycles;
+extern int seed_cycles;
 
-static int number_of_battles=3;
+extern int number_of_battles;
 
-static int mutation_rate=5;
+extern int mutation_rate;
 
-static unsigned long TSprob=.75;
+extern unsigned long TSprob;
 
-static int resurrection_rate=2;
-static int insertion_rate=5;
-static int removal_rate=5;
+extern int resurrection_rate;
+extern int insertion_rate;
+extern int removal_rate;
 
-static int max_number_size=10;
-static int max_instructions=10;
+extern int max_number_size;
+extern int max_instructions;
 
 /********************/
 int a_random_integer(int);

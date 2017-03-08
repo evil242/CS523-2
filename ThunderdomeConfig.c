@@ -7,6 +7,34 @@
 #define LOSS   -1
 #define TIE     0
 
+/************************************/
+/*these are set from the config file*/
+
+ char path_symbol[32]="/";
+
+ int create_new_population=1;
+ char population_name[32]="DD";
+ int population_size=25;
+
+ int starting_cycle=0;
+ int number_of_cycles=25;
+ int seed_cycles=10;
+
+ int number_of_battles=3;
+
+ int mutation_rate=5;
+
+ unsigned long TSprob=.75;
+
+ int resurrection_rate=2;
+ int insertion_rate=5;
+ int removal_rate=5;
+
+ int max_number_size=10;
+ int max_instructions=10;
+
+
+/************************************/
 
 void setup(void){
 

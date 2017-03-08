@@ -355,6 +355,7 @@ setup();
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 
     for (i=0; i<tribe.size(); i++) {
+      tribe[i].fprint();
       tribe[i].print();
     }
 

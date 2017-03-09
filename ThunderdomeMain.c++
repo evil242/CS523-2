@@ -388,14 +388,16 @@ setup();
             }
   percentfit = (sumfit/((float)tribe.size() * (75 * NumOWilkies))*100);
 printf("Sumfit = %f\n", percentfit);
-         logfile << sumfit << endl;
-       } while (percentfit > 75.0);  
+         logfile << "Sumfit = " << sumfit << ", Percentfit = " 
+                 << percentfit << endl;
+       } while (percentfit < 50.0);  
   // stop criteria 
     }
       // sumfit is the sumation of the fitness for the whole tribe
       // If 5 out of 25 warriors had winning score of 5, sumfit = 25
 
     //last fitness and sort
+    TribeReset(tribe);
     Game(tribe);  // Fitness against each other held in Warrior::Rank
     BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 

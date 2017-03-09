@@ -163,8 +163,24 @@ void Warrior::print() {
 
 // This replaces file_copy
 // and straight_replace
+/*Warrior::Warrior(const Warrior &rhs) {
+  fname = "temp.red";
+  header = ";redcode-94\n;assert CORESIZE == 8000\n;author Damion Terrell and Dominic Paul Delvecchio\n";
+  tail = "end;";
+  //TribeRank = 0;
+  TribeRank = rhs.TribeRank;
+  BenchmarkFit = rhs.BenchmarkFit;
+  loc = rhs.loc;
+  body = rhs.body;
+
+}*/
+
+// This replaces file_copy
+// and straight_replace
 Warrior &Warrior::operator=(const Warrior &rhs) {
   //TribeRank = 0;
+  TribeRank = rhs.TribeRank;
+  BenchmarkFit = rhs.BenchmarkFit;
   loc = rhs.loc;
   body = rhs.body;
 
@@ -230,7 +246,7 @@ Warrior &Warrior::operator*(const Warrior &rhs) {
   }
   newar->loc=newar->body.size();
 
-  newar->print();
+  //newar->print();
 
   // did warrior come alive? If not return to old body
     i=0;
@@ -243,6 +259,13 @@ Warrior &Warrior::operator*(const Warrior &rhs) {
 }
 
 void Warrior::Mutation() {
+
+  if (mutation_rate < rand() % 100) return;
+
+  // Passed mutation rate, mutate
+
+   //cout << "Mutating " << serno << endl;
+
   int this_size = body.size();
   int i;
   

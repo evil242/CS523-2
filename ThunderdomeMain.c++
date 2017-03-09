@@ -153,7 +153,6 @@ float RouletSelection (vector<Warrior> &tribe) {
   float min = size;
   //Calc Sum(Fit_i)
   for (i=0; i<size; i++ ) {
-   
        sumfit += tribe[i].TwoFit();
   }
   if(sumfit < 1) sumfit = 1;
@@ -205,63 +204,70 @@ float RouletSelection (vector<Warrior> &tribe) {
 }//end RouletSelection
 
 
-int TournSelection (vector<Warrior> &tribe) {
-  int i;
+float TournSelection (vector<Warrior> &tribe) {
+  int i,a,b;
   int count = tribe.size() - 1;
   int size = tribe.size();
-  int midpoint = size / 2;
+  int midpoint = 1;
   int j=count;
-  int sumfit=0;
+  float sumfit=0;
   int BPC=0;
   float prob_i;
+  float average;
+  int maxfit=0;
+  float fit=0;
 
   Warrior BPair[2];
 
-  //TSprob = .75 from Config.h
-  do { 
-    sumfit=0;
-    BPC=0;
-    for (i=0; i<size; i++ ) { 
-        int currTM = count - i;
-        prob_i = (float)1/(rand()%100);
-         cout << "Tourn prob_i " << prob_i << " TSprob " << TSprob * pow((1 - TSprob),i) << endl;
-        if (TSprob * pow((1 - TSprob),i) > prob_i) {
-           BPair[BPC] = tribe[currTM];
-           BPC++;
-           cout << "Tourn BPC " << BPC << endl;
-        }
-
-       //Calc Sum(Fit_i)
+  for (i=0; i<size; i++ ) { 
        sumfit += tribe[i].TwoFit();
-    }// end for size
-  } while (BPC > 1); // make sure we got two breeding pair
+       if (maxfit < tribe[i].TwoFit()) {
+              maxfit = tribe[i].TwoFit();
+       }
+  }
+  average = sumfit / size;
 
-  //Select by chance for breed Out lower half of pop (sorted by MergeSort)
-  for(i=0; i<midpoint; i+=2){
-            switch (CrossType) {
-               case ONEPTCROSS :
-                  tribe[i] = BPair[0] + BPair[1];
-                  break;
-               case UNIFORMCROSS :
-                  tribe[i] = BPair[0] * BPair[1];
-                  break;
-               default : //same as NOCROSS
-                  break;
-            }
-            switch (CrossType) {
-              case ONEPTCROSS :
-                  tribe[i+1] = BPair[1] + BPair[0];
-                  break;
-               case UNIFORMCROSS :
-                  tribe[i+1] = BPair[1] * BPair[0];
-                  break;
-               default : //same as NOCROSS
-                  break;
-          
-            }
+   //cout << "Average = " << average << endl;
+
+  for (i=0; i<size; i++ ) { 
+      if (tribe[i].TwoFit() < average) {
+          tribe[i].reset_scores();
+      } else { midpoint++; } // cout << "tribe[" << i << "] = " << tribe[i].TwoFit() << endl;}
+
   }
 
-  return (sumfit/size);
+  
+   cout << "Average = " << average << ", Midpoint = " << midpoint << endl;
+
+
+
+
+  //Select by chance for breed Out lower half of pop (sorted by MergeSort)
+  for(i=midpoint; i< (size-1) ; i+=2){
+       a = 0;
+       b = 0;
+       while (a == b) 
+          b = rand() % midpoint;
+       cout << "a = " << a << ", b = " << b << endl;
+       if ( (float)tribe[i].TwoFit() < (float)(sumfit / size)){
+            switch (CrossType) {
+               case ONEPTCROSS :
+                  tribe[i] = tribe[a] + tribe[b];
+                  tribe[i+1] = tribe[b] * tribe[b];
+                  break;
+               case UNIFORMCROSS :
+                  tribe[i] = tribe[a] * tribe[b];
+                  tribe[i+1] = tribe[b] * tribe[b];
+                  break;
+               default : //same as NOCROSS
+                  break;
+            }
+         tribe[i].Mutation(); 
+         tribe[i+1].Mutation(); 
+      }
+  }
+
+  return average;
 }//end TournSelection
 
 void mixMatch (vector<Warrior> &tribe) {
@@ -351,7 +357,6 @@ setup();
 
     for (i=starting_cycle; i<seed_cycles; i++) {
       TribeReset(tribe);
-      Oblong(tribe);  // test for mutation
       Bartertown(tribe);  // Fitness against each other held in Warrior::Rank
       BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
          switch (SelecType) {
@@ -364,6 +369,7 @@ setup();
                default : //same as NOCROSS
                   break;
             }
+      //Oblong(tribe);  // test for mutation
   percentfit = (sumfit/((float)tribe.size() * 75));  
   printf("Sumfit = %f\n", percentfit);
     }
@@ -372,7 +378,7 @@ setup();
     for (i=starting_cycle; i<number_of_cycles; i++) {
        do {
          TribeReset(tribe);
-         Oblong(tribe);  // test for mutation
+         //Oblong(tribe);  // test for mutation
          Game(tribe);  // Fitness against each other held in Warrior::Rank
          BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 
@@ -399,6 +405,7 @@ printf("Sumfit = %f\n", percentfit);
     //last fitness and sort
     TribeReset(tribe);
     Game(tribe);  // Fitness against each other held in Warrior::Rank
+    Bartertown(tribe);
     BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 
     //printf("Tribe Size = %lu\n", tribe.size());

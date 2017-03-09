@@ -1,3 +1,4 @@
+
 #include "obj_war.h"
 #include "Sorting.h"
 
@@ -130,58 +131,74 @@ void Bartertown(vector<Warrior> &tribe) {
       } //for target_number
     }//for source_number
 
-} 
-
+}
 
 int RouletSelection (vector<Warrior> &tribe) {
   int i;
   int count = tribe.size() - 1;
   int size = tribe.size();
   int midpoint = size / 2;
-  int j=count;
-  int sumfit=1; // set to 1 so never div by 0
+  int j;
+  float sumfit=0;
   int BPC=0;
-  long prob_i;
-
-  Warrior BPair[2];
-  BPair[0] = tribe[count];
-  BPair[1] = tribe[count-1];
-
+  float prob_i;
+  float tribe_prob[size];
+  float total_prob = 0;
+  int bTribe[size];
+  Warrior BTribe[size];
+  int canBreed=0;
+  float div;
+  float min = size;
   //Calc Sum(Fit_i)
-  for (i=0; i<count; i++ ) { 
+  for (i=0; i<size; i++ ) {
+   
        sumfit += tribe[i].TwoFit();
   }
-
-  //Select by Roulet chance for breed Out lower half of pop (sorted by MergeSort)
-        for(i=0; i<midpoint; i+=2){
-          prob_i = 1/rand() ;
-          if((tribe[i].TwoFit() / sumfit) < prob_i ) {
+  if(sumfit < 1) sumfit = 1;
+  printf("Sumfit = %f\n", sumfit);  
+  //Calculate individual probabilities
+  for(i=0; i<size; i++){
+      div = tribe[i].TwoFit();
+      tribe_prob[i] = total_prob +( div/ sumfit);
+      // printf("Tribe Member Probability = %f\n", tribe_prob[i]);
+      total_prob = tribe_prob[i];
+      div = (rand()% size) +1;
+      prob_i = 1/div;
+      // printf("Divisor = %f\n", div);
+      // printf("Prob_i = %f\n", prob_i);
+    
+      if(tribe_prob[i] > prob_i) {
+	bTribe[i] = 0;
+        BTribe[canBreed]= tribe[i];
+	canBreed++;
+	//printf("Selected for breeding\n");
+      }
+      else {
+	bTribe[i] = 1;
+	//printf("Rejected for breeding\n");
+      }
+  }
+	  
+      if(canBreed > 3) {
+	//printf("Can Breed\n");
+      for(i = 0; i <size; i++){	  
+          if(bTribe[i]) {
             switch (CrossType) {
                case ONEPTCROSS :
-                  tribe[i] = BPair[0] + BPair[1];
+		 tribe[i] = BTribe[rand()%canBreed] +
+		   BTribe[rand()%canBreed];
                   break;
                case UNIFORMCROSS :
-                  tribe[i] = BPair[0] * BPair[1];
+		 tribe[i] = BTribe[rand() %canBreed] *
+		   BTribe[rand()%canBreed];
                   break;
                default : //same as NOCROSS
                   break;
-            }
-          }
-          if((tribe[i+1].TwoFit() / sumfit) < prob_i ) {
-            switch (CrossType) {
-              case ONEPTCROSS :
-                  tribe[i+1] = BPair[1] + BPair[0];
-                  break;
-               case UNIFORMCROSS :
-                  tribe[i+1] = BPair[1] * BPair[0];
-                  break;
-               default : //same as NOCROSS
-                  break;
-          
-            }
-          }
-        }
-
+	    }
+	  }
+      }
+      }
+         
   return sumfit;
 }//end RouletSelection
 

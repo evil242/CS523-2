@@ -74,7 +74,7 @@ extern int number_of_battles;
 
 extern int mutation_rate;
 
-extern unsigned long TSprob;
+extern float TSprob;
 
 extern int resurrection_rate;
 extern int insertion_rate;

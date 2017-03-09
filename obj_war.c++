@@ -313,10 +313,10 @@ void Warrior::PutMeInCoach() {
    
       //printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
    
-      
-         if (a_score>=(3*number_of_battles)) BenchmarkFit += 5;
-         if (a_score>b_score) BenchmarkFit += 3;
-         if (a_score == b_score) BenchmarkFit += 1;
+         BenchmarkFit += a_score; 
+         //if (a_score>=(3*number_of_battles)) BenchmarkFit += 5;
+         //if (a_score>b_score) BenchmarkFit += 3;
+         //if (a_score == b_score) BenchmarkFit += 1;
    }
 
 

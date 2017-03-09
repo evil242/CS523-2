@@ -33,7 +33,7 @@
 
  int mutation_rate=5;
 
- unsigned long TSprob=.75;
+ float TSprob=.75;
 
  int resurrection_rate=2;
  int insertion_rate=5;
@@ -97,6 +97,13 @@ void setup(void){
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
                CrossType=atoi(++parm_ptr);
+            continue;
+         }
+
+         if(strstr(buffer,"TSprob")!=0) {
+            parm_ptr=strstr(buffer,"=");
+            if (parm_ptr!=0)
+               TSprob=atof(++parm_ptr);
             continue;
          }
 

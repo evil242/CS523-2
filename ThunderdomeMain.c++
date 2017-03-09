@@ -1,4 +1,4 @@
-
+#include <math.h>
 #include "obj_war.h"
 #include "Sorting.h"
 
@@ -17,7 +17,7 @@ int a_random_number(int range) {
 }
 
 
-int Thunderdome(Warrior A, Warrior B){
+int Thunderdome(Warrior &A, Warrior &B){
 
    char command[256];
    char buffer[256]="";
@@ -66,6 +66,8 @@ int Thunderdome(Warrior A, Warrior B){
    pclose(file);
 
    //printf("^^^^^%9s %9s:%d %d\n",aname,bname,a_score,b_score);
+   A.scores(a_score);
+   B.scores(b_score);
 
    if (a_score>=(3*number_of_battles)) return TOTAL_WIN;
    if (b_score>=(3*number_of_battles)) return TOTAL_LOSS;
@@ -109,18 +111,18 @@ void Bartertown(vector<Warrior> &tribe) {
    
             case  TOTAL_WIN   :
                //tribe[source_number] [One Man] leaves the Thunderdome
-               tribe[source_number].scores(3);
+               //tribe[source_number].scores(3);
                break;
    
             case  TOTAL_LOSS :
                //tribe[target_number] [One Man] leaves the Thunderdome
-               tribe[target_number].scores(3);
+               //tribe[target_number].scores(3);
                break;
             case  WIN :
-               tribe[source_number].scores(1);
+               //tribe[source_number].scores(1);
                break;
             case  LOSS :
-               tribe[target_number].scores(1);
+               //tribe[target_number].scores(1);
                break;
             case   TIE :
                break;
@@ -133,7 +135,7 @@ void Bartertown(vector<Warrior> &tribe) {
 
 }
 
-int RouletSelection (vector<Warrior> &tribe) {
+float RouletSelection (vector<Warrior> &tribe) {
   int i;
   int count = tribe.size() - 1;
   int size = tribe.size();
@@ -155,7 +157,7 @@ int RouletSelection (vector<Warrior> &tribe) {
        sumfit += tribe[i].TwoFit();
   }
   if(sumfit < 1) sumfit = 1;
-  printf("Sumfit = %f\n", sumfit);  
+    printf("Sumfit = %f\n", sumfit);  
   //Calculate individual probabilities
   for(i=0; i<size; i++){
       div = tribe[i].TwoFit();
@@ -211,7 +213,7 @@ int TournSelection (vector<Warrior> &tribe) {
   int j=count;
   int sumfit=0;
   int BPC=0;
-  long prob_i;
+  float prob_i;
 
   Warrior BPair[2];
 
@@ -221,10 +223,12 @@ int TournSelection (vector<Warrior> &tribe) {
     BPC=0;
     for (i=0; i<size; i++ ) { 
         int currTM = count - i;
-        prob_i = 1/rand();
-        if (TSprob * ((1 - TSprob)^i) > prob_i) {
+        prob_i = (float)1/(rand()%100);
+         cout << "Tourn prob_i " << prob_i << " TSprob " << TSprob * pow((1 - TSprob),i) << endl;
+        if (TSprob * pow((1 - TSprob),i) > prob_i) {
            BPair[BPC] = tribe[currTM];
            BPC++;
+           cout << "Tourn BPC " << BPC << endl;
         }
 
        //Calc Sum(Fit_i)
@@ -257,7 +261,7 @@ int TournSelection (vector<Warrior> &tribe) {
             }
   }
 
-  return sumfit;
+  return (sumfit/size);
 }//end TournSelection
 
 void mixMatch (vector<Warrior> &tribe) {
@@ -323,7 +327,8 @@ setup();
 
     int i; //for counting dont forget to init
 
-    int sumfit; //for getting return of tribe fitness
+    float sumfit; //for getting return of tribe fitness
+    float percentfit;
 
 
     //Empty Vector
@@ -359,6 +364,8 @@ setup();
                default : //same as NOCROSS
                   break;
             }
+  percentfit = (sumfit/((float)tribe.size() * 75));  
+  printf("Sumfit = %f\n", percentfit);
     }
 
 
@@ -379,15 +386,18 @@ setup();
                default : //same as NOCROSS
                   break;
             }
-
+  percentfit = (sumfit/((float)tribe.size() * (75 * NumOWilkies))*100);
+printf("Sumfit = %f\n", percentfit);
          logfile << sumfit << endl;
-       } while (sumfit < (5 * NumOWilkies));  // stop criteria 
+       } while (percentfit > 75.0);  
+  // stop criteria 
     }
       // sumfit is the sumation of the fitness for the whole tribe
       // If 5 out of 25 warriors had winning score of 5, sumfit = 25
 
-
-      Game(tribe);  // Fitness against each other held in Warrior::Rank
+    //last fitness and sort
+    Game(tribe);  // Fitness against each other held in Warrior::Rank
+    BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 

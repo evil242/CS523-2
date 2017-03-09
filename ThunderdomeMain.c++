@@ -390,7 +390,7 @@ setup();
 printf("Sumfit = %f\n", percentfit);
          logfile << "Sumfit = " << sumfit << ", Percentfit = " 
                  << percentfit << endl;
-       } while (percentfit < 50.0);  
+       } while (percentfit < 21.0);  
   // stop criteria 
     }
       // sumfit is the sumation of the fitness for the whole tribe

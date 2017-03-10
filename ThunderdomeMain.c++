@@ -136,7 +136,7 @@ void Bartertown(vector<Warrior> &tribe) {
 }
 
 float RouletSelection (vector<Warrior> &tribe) {
-  int i;
+  int i,a,b;
   int count = tribe.size() - 1;
   int size = tribe.size();
   int midpoint = size / 2;
@@ -156,7 +156,7 @@ float RouletSelection (vector<Warrior> &tribe) {
        sumfit += tribe[i].TwoFit();
   }
   if(sumfit < 1) sumfit = 1;
-    printf("Sumfit = %f\n", sumfit);  
+    //printf("Sumfit = %f\n", sumfit);  
   //Calculate individual probabilities
   for(i=0; i<size; i++){
       div = tribe[i].TwoFit();
@@ -175,27 +175,38 @@ float RouletSelection (vector<Warrior> &tribe) {
 	//printf("Selected for breeding\n");
       }
       else {
+        tribe[i].reset_scores();
 	bTribe[i] = 1;
 	//printf("Rejected for breeding\n");
       }
   }
+
+  BottomUpMergeSort(tribe);//highest fitness based on rank at lowest element
+
+
 	  
-      if(canBreed > 3) {
+      if(canBreed > 2) {
 	//printf("Can Breed\n");
-      for(i = 0; i <size; i++){	  
+      for(i = canBreed; i < (size-1); i+=2){	  
           if(bTribe[i]) {
+             a = rand()%canBreed;
+             b = rand()%canBreed;
+             while (a == b) 
+                b =rand()%canBreed;
             switch (CrossType) {
                case ONEPTCROSS :
-		 tribe[i] = BTribe[rand()%canBreed] +
-		   BTribe[rand()%canBreed];
+		 tribe[i] = BTribe[a]+ BTribe[b];
+		 tribe[i+1] = BTribe[b]+ BTribe[a];
                   break;
                case UNIFORMCROSS :
-		 tribe[i] = BTribe[rand() %canBreed] *
-		   BTribe[rand()%canBreed];
+		 tribe[i] = BTribe[a] * BTribe[b];
+		 tribe[i+1] = BTribe[b] * BTribe[a];
                   break;
                default : //same as NOCROSS
                   break;
 	    }
+           tribe[i].Mutation(); 
+           tribe[i+1].Mutation(); 
 	  }
       }
       }
@@ -217,27 +228,30 @@ float TournSelection (vector<Warrior> &tribe) {
   int maxfit=0;
   float fit=0;
 
-  Warrior BPair[2];
-
+  // Calculate Average and capture Max Fit (not used but may use later)
   for (i=0; i<size; i++ ) { 
        sumfit += tribe[i].TwoFit();
        if (maxfit < tribe[i].TwoFit()) {
               maxfit = tribe[i].TwoFit();
        }
   }
+
+  // Average Tribe fitness, for selecting below average
   average = sumfit / size;
 
    //cout << "Average = " << average << endl;
 
+
+   // Start selecting against below average
   for (i=0; i<size; i++ ) { 
       if (tribe[i].TwoFit() < average) {
-          tribe[i].reset_scores();
+          tribe[i].reset_scores();  // if not already zero, set to zero
       } else { midpoint++; } // cout << "tribe[" << i << "] = " << tribe[i].TwoFit() << endl;}
 
   }
 
   
-   cout << "Average = " << average << ", Midpoint = " << midpoint << endl;
+   //cout << "Average = " << average << ", Midpoint = " << midpoint << endl;
 
 
 
@@ -248,7 +262,7 @@ float TournSelection (vector<Warrior> &tribe) {
        b = 0;
        while (a == b) 
           b = rand() % midpoint;
-       cout << "a = " << a << ", b = " << b << endl;
+       //cout << "a = " << a << ", b = " << b << endl;
        if ( (float)tribe[i].TwoFit() < (float)(sumfit / size)){
             switch (CrossType) {
                case ONEPTCROSS :
@@ -341,6 +355,8 @@ setup();
 
     float sumfit; //for getting return of tribe fitness
     float percentfit;
+    float MaxTribeFit = 0.0;
+    float MaxDiff,DiffRate;
 
 
     //Empty Vector
@@ -361,10 +377,37 @@ setup();
 
     cout << "Tribe size " << tribe.size() << endl;
 
+     switch (SelecType) {
+       case ROULETTE :
+            cout << "Running ROULETTE Selection with ";
+            break;
+       case TOURNAMENT :
+            cout << "Running TOURNAMENT Selection with ";
+            break;
+       default : //same as NOCROSS
+            cout << "Running REPLACE 1/2 Selection with ";
+            break;
+     }
+
+     switch (CrossType) {
+       case ONEPTCROSS :
+            cout << "1-POINT Crossover" << endl;
+            break;
+       case UNIFORMCROSS :
+            cout << "UNIFORM Crossover" << endl;
+            break;
+       default : //same as NOCROSS
+            cout << "Mutation Only" << endl;
+            break;
+     }
+
+    cout << "Creating seed population via Battle Royale in the Thunder Dome for " << seed_cycles << " cycles" << endl;
+    cout << "Tribe size " << tribe.size() << endl;
+
     for (i=starting_cycle; i<seed_cycles; i++) {
       TribeReset(tribe);
       Bartertown(tribe);  // Fitness against each other held in Warrior::Rank
-      BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
+      BottomUpMergeSort(tribe);//highest fitness based on rank at lowest element
          switch (SelecType) {
                case ROULETTE :
                   sumfit = RouletSelection(tribe); // call Slection and chance for child mutation
@@ -377,16 +420,48 @@ setup();
                   break;
             }
       //Oblong(tribe);  // test for mutation
-  percentfit = (sumfit/((float)tribe.size() * 75));  
-  printf("Sumfit = %f\n", percentfit);
+         percentfit = (sumfit/((float)tribe.size() * 75));  
+         cout << "Sumfit = " << sumfit << ", Percentfit = " 
+                 << percentfit << endl;
+         logfile << "Sumfit = " << sumfit << ", Percentfit = " 
+                 << percentfit << endl;
     }
 
+
+     switch (SelecType) {
+       case ROULETTE :
+            cout << "Running ROULETTE Selection with ";
+            break;
+       case TOURNAMENT :
+            cout << "Running TOURNAMENT Selection with ";
+            break;
+       default : //same as NOCROSS
+            cout << "Running REPLACE 1/2 Selection with ";
+            break;
+     }
+
+     switch (CrossType) {
+       case ONEPTCROSS :
+            cout << "1-POINT Crossover" << endl;
+            break;
+       case UNIFORMCROSS :
+            cout << "UNIFORM Crossover" << endl;
+            break;
+       default : //same as NOCROSS
+            cout << "Mutation Only" << endl;
+            break;
+     }
+
+    cout << "Created seed population via Battle Royale in the Thunder Dome for " << seed_cycles << " cycles" << endl;
+    cout << "Tribe size " << tribe.size() << endl;
+    cout << "Starting GA against Benchmark REDCODE Warriors: " << endl;
+    cout << "Will stop after Annealing Rate " << annealing_rate << " hits for " << number_of_cycles << " cycles." << endl;
 
     for (i=starting_cycle; i<number_of_cycles; i++) {
        do {
          TribeReset(tribe);
          Game(tribe);  // Fitness against each other held in Warrior::Rank
-         BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
+         BottomUpMergeSort(tribe);//highest fitness based on rank at lowest element
 
          switch (SelecType) {
                case ROULETTE :
@@ -399,12 +474,19 @@ setup();
                   sumfit = Oblong(tribe);  // down at the chimical spill mutate tribe
                   break;
             }
-  percentfit = (sumfit/((float)tribe.size() * (75 * NumOWilkies))*100);
-printf("Sumfit = %f\n", percentfit);
+         percentfit = (sumfit/((float)tribe.size() * (75 * NumOWilkies))*100);
+         MaxDiff = sumfit - MaxTribeFit;
+         if (sumfit > MaxTribeFit) MaxTribeFit = sumfit;
+         DiffRate = ((float)abs((long)MaxDiff) + MaxTribeFit) / MaxTribeFit;
          logfile << "Sumfit = " << sumfit << ", Percentfit = " 
-                 << percentfit << endl;
-       } while (percentfit < 21.0);  
+                 << percentfit << ", DiffRate = " << DiffRate << endl;
+
+        //printf("Sumfit = %f\n", percentfit);
+       } while ( DiffRate > annealing_rate );  
   // stop criteria 
+         cout << "Sumfit = " << sumfit << ", Percentfit = " 
+                 << percentfit << ", DiffRate = " << DiffRate << endl;
+    cout << "Will stop after Annealing Rate " << annealing_rate << " hits for " << i << " cycles." << endl;
     }
       // sumfit is the sumation of the fitness for the whole tribe
       // If 5 out of 25 warriors had winning score of 5, sumfit = 25

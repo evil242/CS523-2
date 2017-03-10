@@ -76,7 +76,7 @@ extern int mutation_rate;
 
 extern float TSprob;
 
-extern int resurrection_rate;
+extern float annealing_rate;
 extern int insertion_rate;
 extern int removal_rate;
 

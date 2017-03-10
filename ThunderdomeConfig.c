@@ -35,7 +35,7 @@
 
  float TSprob=.75;
 
- int resurrection_rate=2;
+ float annealing_rate=2;
  int insertion_rate=5;
  int removal_rate=5;
 
@@ -70,7 +70,7 @@ void setup(void){
    mutation_rate=25;
    insertion_rate=5;
    removal_rate=5;
-   resurrection_rate=2;
+   annealing_rate=2;
    number_of_battles=3;
    seed_cycles=10;
 
@@ -178,10 +178,10 @@ void setup(void){
             continue;
          }
 
-         if(strstr(buffer,"resurrection_rate")!=0) {
+         if(strstr(buffer,"annealing_rate")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
-               resurrection_rate=atoi(++parm_ptr);
+               annealing_rate=atof(++parm_ptr);
             continue;
          }
 
@@ -222,7 +222,7 @@ void setup(void){
    printf("mutation_rate=%d\n",mutation_rate);
    printf("insertion_rate=%d\n",insertion_rate);
    printf("removal_rate=%d\n",removal_rate);
-   printf("resurrection_rate=%d\n",resurrection_rate);
+   printf("annealing_rate=%f\n",annealing_rate);
    printf("number_of_battles=%d\n",number_of_battles);
    printf("population_name=%s\n",population_name);
    printf("path_symbol=%s\n",path_symbol);

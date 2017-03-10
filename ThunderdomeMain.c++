@@ -270,30 +270,36 @@ float TournSelection (vector<Warrior> &tribe) {
   return average;
 }//end TournSelection
 
-void mixMatch (vector<Warrior> &tribe) {
+void ReplaceBottomHalf (vector<Warrior> &tribe) {
   int i;
   int count = tribe.size() - 1;
   int size = tribe.size();
   int midpoint = size / 2;
-  int j=count;
+  int j=0;
 
 
 
-  for(i=0; i<midpoint; i+=2){
-      tribe[i] = tribe[j] + tribe[j-1];
-      tribe[i+1] = tribe[j-1] + tribe[j];
-      j -=2;
+  for(i=midpoint; i<(size-1); i+=2){
+      tribe[i] = tribe[j] + tribe[j+1];
+      tribe[i+1] = tribe[j+1] + tribe[j];
+      j +=2;
 
   }
 }
 
-void Oblong(vector<Warrior> &tribe) {
+float Oblong(vector<Warrior> &tribe) {
+  //Calc Sum(Fit_i)
     int size=tribe.size();
+    float sumfit=0;
+
     for (int i=0; i<size; i++) {
+       sumfit += tribe[i].TwoFit();
        if (mutation_rate > rand() % 100) {
          tribe[i].Mutation(); 
        }
     }
+
+   return sumfit;
 
 }
 
@@ -361,12 +367,13 @@ setup();
       BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
          switch (SelecType) {
                case ROULETTE :
-                  sumfit = RouletSelection(tribe); // call crossover
+                  sumfit = RouletSelection(tribe); // call Slection and chance for child mutation
                   break;
                case TOURNAMENT :
-                  sumfit = TournSelection(tribe); // call crossover
+                  sumfit = TournSelection(tribe); // call Selection and chance for child mutation
                   break;
                default : //same as NOCROSS
+                  sumfit = Oblong(tribe);  // down at the chmical spill mutate tribe
                   break;
             }
       //Oblong(tribe);  // test for mutation
@@ -378,18 +385,18 @@ setup();
     for (i=starting_cycle; i<number_of_cycles; i++) {
        do {
          TribeReset(tribe);
-         //Oblong(tribe);  // test for mutation
          Game(tribe);  // Fitness against each other held in Warrior::Rank
          BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
 
          switch (SelecType) {
                case ROULETTE :
-                  sumfit = RouletSelection(tribe); // call crossover
+                  sumfit = RouletSelection(tribe);  // call Slection and chance for child mutation
                   break;
                case TOURNAMENT :
-                  sumfit = TournSelection(tribe); // call crossover
+                  sumfit = TournSelection(tribe); // call Slection and chance for child mutation
                   break;
                default : //same as NOCROSS
+                  sumfit = Oblong(tribe);  // down at the chimical spill mutate tribe
                   break;
             }
   percentfit = (sumfit/((float)tribe.size() * (75 * NumOWilkies))*100);
@@ -404,9 +411,9 @@ printf("Sumfit = %f\n", percentfit);
 
     //last fitness and sort
     TribeReset(tribe);
-    Game(tribe);  // Fitness against each other held in Warrior::Rank
-    Bartertown(tribe);
-    BottomUpMergeSort(tribe);//highest fitness based on rank at largest element
+    Game(tribe);  
+    //Bartertown(tribe);
+    BottomUpMergeSort(tribe);//highest fitness based on rank at lowest element
 
     //printf("Tribe Size = %lu\n", tribe.size());
     // simple print of current tribe members 

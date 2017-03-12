@@ -1,3 +1,5 @@
+#include <sys/stat.h>
+#include <unistd.h>
 #include <math.h>
 #include "obj_war.h"
 #include "Sorting.h"
@@ -381,15 +383,15 @@ setup();
          //pushes new Warrior into the trib, uses Warrior construct to 
          //create random baseline of redcode
          tribe.push_back(Warrior(population_name,i));
-         tribe2.push_back(Warrior(population_name,i+population+5));
+         tribe2.push_back(Warrior(population_name,i+population_size+5));
     }
          RockyTribe.push_back(Warrior("RagnarLothbrok",1));
          RockyTribe.push_back(Warrior("GrepSedAwk",2));
 
     //simple print of current tribe members 
-    for (i=0; i<tribe.size(); i++) {
-      tribe[i].print();
-    }
+    //for (i=0; i<tribe.size(); i++) {
+      //tribe[i].print();
+    //}
 
     cout << "Tribe size " << tribe.size() << endl;
 
@@ -480,7 +482,7 @@ setup();
          << " hits for " << number_of_cycles << " cycles." << endl;
 
     cout << "To exit out of this loop, exec cmd touch HALT" << endl
-         << "   Example: $ touch HALT" << endl
+         << "   Example: $ touch HALT" << endl;
 
     // Do while fitness still moving loop inside of for number_of_cycles
     // As fitness starts to chill below annealing_rate cycle loop counts down
@@ -505,9 +507,11 @@ setup();
 
          if (tribe[0].TwoFit() >  RockyTribe[0].TwoFit() ) {
             RockyTribe[0] = tribe[0];
+            RockyTribe[0].fprint();
          }
          if (tribe2[0].TwoFit() >  RockyTribe[1].TwoFit() ) {
             RockyTribe[1] = tribe2[0];
+            RockyTribe[1].fprint();
          }
 
          switch (SelecType) {
@@ -536,7 +540,7 @@ setup();
 
          DiffRate = ((float)abs((long)MaxDiff) + MaxTribeFit) / MaxTribeFit;
 
-         logfile << "GenPOP = " << Gen POP << " : Sumfit = " << sumfit 
+         logfile << "GenPop = " << GenPop << " : Sumfit = " << sumfit 
                  << " : Percentfit = " << percentfit << " : DiffRate = " 
                  << DiffRate << " : Sumfit2 = " << sumfit2 << endl;
 
@@ -546,6 +550,10 @@ setup();
        }
         //printf("Sumfit = %f\n", percentfit);
        } while ( DiffRate > annealing_rate );  
+              if (DiffRate == 1) {
+                 cout << "System has chilled" << endl;
+                 i = 0;
+              }
   // stop criteria 
          cout << "GenPop = " << GenPop << ": Sumfit = " << sumfit 
               << ", Percentfit = " << percentfit << ", DiffRate = " 
@@ -584,11 +592,11 @@ setup();
     // simple print of current tribe members 
     for (i=0; i<tribe.size(); i++) {
       tribe[i].fprint();
-      tribe[i].print();
+      //tribe[i].print();
     }
     for (i=0; i<tribe2.size(); i++) {
       tribe2[i].fprint();
-      tribe2[i].print();
+      //tribe2[i].print();
     }
 
     for (i=0; i<RockyTribe.size(); i++) {

@@ -45,6 +45,9 @@
  int CrossType = ONEPTCROSS; 
  int SelecType = ROULETTE;
 
+ string Benchmarktest = "";
+
+
 
 /************************************/
 
@@ -74,6 +77,8 @@ void setup(void){
    number_of_battles=3;
    seed_cycles=10;
 
+  Benchmarktest="WilkiesBench/BLUEFUNK.RED WilkiesBench/MARCIA13.RED WilkiesBench/RAVE.RED WilkiesBench/CANNON.RED  WilkiesBench/NOBODY.RED  WilkiesBench/THERMITE.RED WilkiesBench/FSTORM.RED  WilkiesBench/PAPERONE.RED WilkiesBench/TIME.RED WilkiesBench/IRONGATE.RED WilkiesBench/PSWING.RED  WilkiesBench/TORNADO.RED";
+
    strcpy(population_name,"DD");
    strcpy(path_symbol,"/");
 
@@ -97,13 +102,6 @@ void setup(void){
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
                CrossType=atoi(++parm_ptr);
-            continue;
-         }
-
-         if(strstr(buffer,"TSprob")!=0) {
-            parm_ptr=strstr(buffer,"=");
-            if (parm_ptr!=0)
-               TSprob=atof(++parm_ptr);
             continue;
          }
 
@@ -138,7 +136,7 @@ void setup(void){
          if(strstr(buffer,"seed_cycles")!=0) {
             parm_ptr=strstr(buffer,"=");
             if (parm_ptr!=0)
-               number_of_cycles=atoi(++parm_ptr);
+               seed_cycles=atoi(++parm_ptr);
             continue;
          }
 
@@ -212,9 +210,15 @@ void setup(void){
       fclose(config_file);
    }
 
+   //for (int i = 0; i < NumOWilkies; i++ ) {
+       //Benchmarktest = Benchmarktest + WilkiesBenchDir + "/" + WilkiesBench + " ";
+   //}
+
+
    /*print the values*/
    printf("create_new_population=%d\n",create_new_population);
    printf("population_size=%d\n",population_size);
+   printf("seed_cycles=%d\n",seed_cycles);
    printf("number_of_cycles=%d\n",number_of_cycles);
    printf("starting_cycle=%d\n",starting_cycle);
    printf("max_instructions=%d\n",max_instructions);

@@ -296,8 +296,8 @@ void Warrior::PutMeInCoach() {
 
    fprint();
 
-   for (int BMtest=0; BMtest < NumOWilkies; BMtest++) {
-     bname = WilkiesBenchDir + "/" + WilkiesBench[BMtest]; 
+   //for (int BMtest=0; BMtest < NumOWilkies; BMtest++) {
+     bname = Benchmarktest; //WilkiesBenchDir + "/" + WilkiesBench[BMtest]; 
 
 
       sprintf(command, "./pmars -r %d -b -o %s %s",
@@ -307,10 +307,16 @@ void Warrior::PutMeInCoach() {
       file = popen(command,"r");
  
       //if ((file=fopen("temp.txt","r"))==0) exit(0);
-   
-      fgets (buffer,255,file);
-   
-      if (strstr(buffer,aname)==0) {
+    while (fgets(buffer,255,file)!=0) {
+ 
+      //fgets (buffer,255,file);
+      if (strstr(buffer,aname)!=0) {
+      //cout << "buffer " << aname << " " << buffer << endl; 
+         s_ptr=(strstr(buffer,"scores"));
+         s_ptr+=7;
+         a_score=atoi(s_ptr);
+      }
+      /*if (strstr(buffer,aname)==0) {
          s_ptr=(strstr(buffer,"scores"));
          s_ptr+=7;
          b_score=atoi(s_ptr);
@@ -329,18 +335,18 @@ void Warrior::PutMeInCoach() {
       } else {
          s_ptr=(strstr(buffer,"scores"));
          s_ptr+=7;
-         a_score=atoi(s_ptr);
+         a_score=atoi(s_ptr);*/
       }
    
       pclose(file);
    
-      //printf("^^^^^%9s %9s:%d %d\n",aname,bname.c_str(),a_score,b_score);
+      //printf("^^^^^%s: %d\n",aname,a_score);
    
          BenchmarkFit += a_score; 
          //if (a_score>=(3*number_of_battles)) BenchmarkFit += 5;
          //if (a_score>b_score) BenchmarkFit += 3;
          //if (a_score == b_score) BenchmarkFit += 1;
-   }
+   //}
 
 
 

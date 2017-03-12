@@ -27,7 +27,7 @@ using namespace std;
 #define RANDOMSEL 2
 
 static unsigned long NumOWilkies=12;
-
+extern string Benchmarktest;
 static string WilkiesBenchDir="WilkiesBench";
 
 static string WilkiesBench[]={\

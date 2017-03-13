@@ -35,9 +35,6 @@ int Thunderdome(Warrior &A, Warrior &B){
    sprintf(command, "./pmars -r %d -b -o %s %s",
             number_of_battles,aname,bname);
 
-   //FILE * file=0;
-   //system(command);
-   //if ((file=fopen("temp.txt","r"))==0) exit(0);
 
    FILE *file = popen(command,"r");
 
@@ -101,10 +98,7 @@ void Bartertown(vector<Warrior> &tribe) {
   /*
    // This while uses random once through population to determine fitness
    //pick a target
-   target_number=source_number;
-   while (target_number==source_number)
-         target_number=(a_random_number(population_size - 1)); */
-
+   */
    for (target_number=source_number+1; target_number < pop_size; target_number++) {
        if (target_number != source_number) {
 
@@ -251,12 +245,8 @@ float TournSelection (vector<Warrior> &tribe) {
       } else { midpoint++; } // cout << "tribe[" << i << "] = " << tribe[i].TwoFit() << endl;}
 
   }
-
   
    //cout << "Average = " << average << ", Midpoint = " << midpoint << endl;
-
-
-
 
   //Select by chance for breed Out lower half of pop (sorted by MergeSort)
   for(i=midpoint; i< (size-1) ; i+=2){

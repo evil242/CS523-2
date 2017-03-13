@@ -100,7 +100,7 @@ Warrior::Warrior(string n, int sn)
     body.clear();
 
     // now nets build a body of code 10 lines long
-    for(int i=0; i<10; i++) {
+    for(int i=0; i<max_instructions; i++) {
 
       // fetch string of "opcode.opmod addrmode #,addrmode #"
       body.push_back(new_line_of_code());
@@ -316,26 +316,6 @@ void Warrior::PutMeInCoach() {
          s_ptr+=7;
          a_score=atoi(s_ptr);
       }
-      /*if (strstr(buffer,aname)==0) {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         b_score=atoi(s_ptr);
-      } else {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         a_score=atoi(s_ptr);
-      }
-   
-      fgets (buffer,255,file);
-   
-      if (strstr(buffer,aname)==0) {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         b_score=atoi(s_ptr);
-      } else {
-         s_ptr=(strstr(buffer,"scores"));
-         s_ptr+=7;
-         a_score=atoi(s_ptr);*/
       }
    
       pclose(file);

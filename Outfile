@@ -1,0 +1,155 @@
+create_new_population=1
+population_size=25
+seed_cycles=10
+number_of_cycles=5
+starting_cycle=0
+max_instructions=50
+max_number_size=10
+mutation_rate=5
+insertion_rate=5
+removal_rate=5
+annealing_rate=1.002500
+number_of_battles=25
+population_name=DD
+path_symbol=/
+CrossType=1
+SelecType=1
+Tribe size 25
+Running TOURNAMENT Selection with 1-POINT Crossover
+Creating seed population via Battle Royale in the Thunder Dome for 10 cycles
+Tribe size 25
+Sumfit = 15755, Percentfit = 8.40267
+Sumfit = 15725, Percentfit = 8.38667
+Sumfit = 15064, Percentfit = 8.03413
+Sumfit = 15033, Percentfit = 8.0176
+Sumfit = 15043, Percentfit = 8.02293
+Sumfit = 15045, Percentfit = 8.024
+Sumfit = 15047, Percentfit = 8.02507
+Sumfit = 15033, Percentfit = 8.0176
+Sumfit = 15001, Percentfit = 8.00053
+Sumfit = 15002, Percentfit = 8.00107
+Running TOURNAMENT Selection with 1-POINT Crossover
+Created seed population via Battle Royale in the Thunder Dome for 10 cycles
+Tribe size 25
+Starting GA against Benchmark REDCODE Warriors: 
+Will stop after Annealing Rate 1.0025 hits for 5 cycles.
+To exit out of this loop, exec cmd touch HALT
+   Example: $ touch HALT
+GenPop = 16: Sumfit = 8540, Percentfit = 37.9556, DiffRate = 1.00234
+Will stop after Annealing Rate 1.0025 hits for 5 cycles.
+GenPop = 354: Sumfit = 10977, Percentfit = 48.7867, DiffRate = 0
+Will stop after Annealing Rate 1.0025 hits for -1 cycles.
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 705
+;name RagnarLothbrok_1.red
+nop.f  # -3,* 9
+nop.ba * 1,> -7
+jmz.ab < 7,* -7
+add.ab { 3,{ 3
+mod.ab @ -4,# -9
+spl.i  # -6,$ -2
+spl.ba @ 9,* 5
+add.ba * 2,@ 7
+seq.ab $ -9,{ -2
+djn.ab < 6,# -5
+spl.f  # 8,{ 0
+jmp.i  { 3,* -5
+sub.ba $ -7,{ -9
+spl.b  @ -9,@ -8
+sub.a  # 10,{ 6
+div.ba > -8,$ -3
+nop.f  < -2,< 0
+nop.b  @ -3,* 7
+seq.ab * -6,@ -2
+seq.ba > 5,> -9
+jmn.f  # -1,# -2
+sub.x  @ -5,@ 8
+seq.x  < 6,* -9
+jmz.a  < -2,< -8
+slt.ab > -3,< -7
+div.ab * 3,$ 9
+mov.ba $ 10,< -2
+nop.f  # -5,> 9
+mov.f  { 5,# 10
+add.x  < -2,@ 8
+slt.ba $ -9,# -9
+sne.x  @ 8,> 7
+jmz.x  { 4,{ 1
+jmz.i  { -1,# 8
+spl.b  # -6,# -8
+cmp.ba @ 0,> 9
+djn.b  { 9,$ -8
+mov.i  @ -8,@ -8
+sub.x  > -3,{ 5
+mul.f  < 7,{ -3
+jmp.i  < -3,{ -6
+mov.b  # -6,> -1
+jmp.ba @ -8,< 7
+djn.b  < -9,> 6
+slt.ba < 6,# -2
+dat.ab { -2,# -1
+jmp.f  * 3,* 10
+slt.f  > 4,> 5
+jmz.i  { 8,> 1
+sne.ba { 4,$ -6
+end;
+;redcode-94
+;assert CORESIZE == 8000
+;author Damion Terrell and Dominic Paul Delvecchio
+;Rank 0
+;BenchmarkFit 680
+;name GrepSedAwk_2.red
+nop.f  # -3,* 9
+nop.ba * 1,> -7
+jmz.ab < 7,* -7
+slt.ba < -1,$ -2
+mod.ab @ -4,# -9
+spl.i  # -6,$ -2
+spl.ba @ 9,* 5
+add.ba * 2,@ 7
+jmz.b  $ -9,# -7
+djn.ab < 6,# -5
+spl.f  # 8,{ 0
+jmp.i  { 3,* -5
+sub.ba $ -7,{ -9
+spl.b  @ -9,@ -8
+sub.a  # 10,{ 6
+div.ba > -8,$ -3
+nop.f  < -2,< 0
+nop.b  @ -3,* 7
+seq.ab * -6,@ -2
+slt.i  * 2,# -5
+jmn.f  # -1,# -2
+sub.x  @ -5,@ 8
+seq.x  < 6,* -9
+jmz.a  < -2,< -8
+slt.ab > -3,< -7
+div.ab * 3,$ 9
+mov.b  @ -1,* -2
+cmp.b  { -1,< 1
+mov.f  { 5,# 10
+add.x  < -2,@ 8
+slt.ba $ -9,# -9
+sne.x  @ 8,> 7
+jmz.x  { 4,{ 1
+jmz.i  { -1,# 8
+spl.b  # -6,# -8
+cmp.ba @ 0,> 9
+djn.b  { 9,$ -8
+mov.i  @ -8,@ -8
+sub.x  > -3,{ 5
+mul.f  < 7,{ -3
+jmp.ab > 7,# 3
+mov.b  # -6,> -1
+jmp.ba @ -8,< 7
+djn.b  < -9,> 6
+slt.ba < 6,# -2
+dat.ab { -2,# -1
+jmp.f  * 3,* 10
+slt.f  > 4,> 5
+jmz.i  { 8,> 1
+sne.ba { 4,$ -6
+end;

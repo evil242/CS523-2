@@ -2,6 +2,7 @@
 #include "Sorting.h"
 
 //ganked and modified from Wiki
+//https://en.wikipedia.org/wiki/Merge_sort
 void BottomUpMergeSort(vector<Warrior> &TribeA) {
 
   int n = TribeA.size();

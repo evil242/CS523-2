@@ -85,7 +85,8 @@ The primise of the warrior class is that it creates a warrior with
 initial random lines of code (need to add seed to random other wise same code).
 
 
-Files:
+C/C++ Files:
+
   Sorting.c - Warrior Vector sorting functions
   Sorting.h - sorting functions external declerations
 

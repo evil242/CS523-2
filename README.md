@@ -157,8 +157,4 @@ Important Public Functions
     reset_scores() // resets BenchmarkFit and TribeRank to 0
 
     TwoFit() // returns BenchmarkFit+TribeRank; 
-   
-   to create a single warrior
-       Warrior myfirstwarrior("xx",0);
-
-
+  
